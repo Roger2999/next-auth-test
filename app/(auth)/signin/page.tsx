@@ -1,5 +1,6 @@
-import  LoginForm  from "@/components/login-form"
+
 import { GalleryVerticalEndIcon } from "lucide-react"
+import LoginForm from "../components/login-form"
 
 export default function SignIn() {
   return (

@@ -88,6 +88,14 @@ export async function signupWithCredentials(
         password: hashedPassword,
       },
     });
+
+    return {
+      data: fields,
+      success: true,
+      message: "User created successfully",
+      dbErrors: null,
+      validationErrors: null,
+    };
   } catch (error) {
     console.error("Signup error:", error);
     const dbError = error as Error;
@@ -103,5 +111,4 @@ export async function signupWithCredentials(
       validationErrors: null,
     };
   }
-  redirect("/signin");
 }

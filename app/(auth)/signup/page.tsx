@@ -1,9 +1,10 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { signupWithCredentials } from "../actions/auth";
 import { FormState } from "@/lib/zod";
 import SignupFormError from "../components/field-error";
+import { useRouter } from "next/navigation";
 
 const INITIAL_STATE: FormState = {
   success: false,
@@ -16,6 +17,14 @@ export default function Signin() {
     signupWithCredentials,
     INITIAL_STATE,
   );
+  const router = useRouter();
+
+  useEffect(() => {
+    if (formState.success) {
+      router.push("/signin");
+    }
+  }, [formState.success, router]);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <form
@@ -68,6 +77,9 @@ export default function Signin() {
         </button>
         {formState.dbErrors && (
           <p className="text-red-500 text-sm">{formState.dbErrors.message}</p>
+        )}
+        {!formState.dbErrors && formState.success && (
+          <p className="text-green-500 text-sm">{formState.message}</p>
         )}
       </form>
     </div>

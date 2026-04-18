@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { deleteAllDbUser } from "./(auth)/actions/auth";
 
 export default function Home() {
   return (
@@ -18,9 +17,6 @@ export default function Home() {
         >
           Sign up
         </Link>
-        <button onClick={deleteAllDbUser} className="border rounded-md p-1">
-          Delete all db users
-        </button>
       </div>
     </main>
   );

@@ -4,7 +4,6 @@
 
 import { FormState, SignupFormSchema } from "@/lib/zod";
 import prisma from "@/lib/prisma";
-import { AuthError } from "next-auth";
 import z from "zod";
 import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
@@ -110,7 +109,4 @@ export async function signupWithCredentials(
 export async function logout() {
   await deleteSession();
   redirect("/signin");
-}
-export async function deleteAllDbUser() {
-  await prisma.user.deleteMany({});
 }

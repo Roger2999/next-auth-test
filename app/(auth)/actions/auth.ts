@@ -9,7 +9,7 @@ import z from "zod";
 import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
 
-import { createSession } from "@/app/lib/session";
+import { createSession, deleteSession } from "@/app/lib/session";
 
 export type SignInState = {
   success?: boolean;
@@ -110,6 +110,10 @@ export async function signupWithCredentials(
   redirect("/dashboard");
 }
 
+export async function logout() {
+  await deleteSession();
+  redirect("/signin");
+}
 export async function deleteAllDbUser() {
   await prisma.user.deleteMany({});
 }

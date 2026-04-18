@@ -2,7 +2,12 @@
 
 // import { signIn, signOut } from "@/auth";
 
-import { FormState, SignupFormSchema } from "@/lib/zod";
+import {
+  FormState,
+  SigninFormSchema,
+  SigninFormState,
+  SignupFormSchema,
+} from "@/lib/zod";
 import prisma from "@/lib/prisma";
 import z from "zod";
 import bcrypt from "bcryptjs";
@@ -10,10 +15,10 @@ import { redirect } from "next/navigation";
 
 import { createSession, deleteSession } from "@/app/lib/session";
 
-export type SignInState = {
-  success?: boolean;
-  error?: string;
-};
+// export type SignInState = {
+//   success?: boolean;
+//   error?: string;
+// };
 
 // export async function signInWithGitHub(
 //   prevState: SignInState | null,
@@ -88,7 +93,6 @@ export async function signupWithCredentials(
 
     await createSession(user.id);
   } catch (error) {
-    console.error("Signup error:", error);
     const dbError = error as Error;
     return {
       data: fields,
@@ -103,6 +107,59 @@ export async function signupWithCredentials(
     };
   }
 
+  redirect("/dashboard");
+}
+export async function signin(
+  prevState: SigninFormState,
+  formData: FormData,
+): Promise<SigninFormState> {
+  const fields = {
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
+  };
+  // 1. Validar campos
+  const validateFields = SigninFormSchema.safeParse(fields);
+
+  if (!validateFields.success) {
+    return {
+      data: fields,
+      success: false,
+      message: "Validation error",
+      dbErrors: null,
+      validationErrors: z.flattenError(validateFields.error).fieldErrors,
+    };
+  }
+
+  const { email, password } = validateFields.data;
+
+  // 2. Buscar usuario en DB
+  const user = await prisma.user.findUnique({
+    where: { email },
+  });
+  if (!user || !user.password)
+    return {
+      data: fields,
+      success: false,
+      message: "Invalid credentials",
+      dbErrors: { message: "Invalid credentials" },
+      validationErrors: null,
+    };
+
+  // 3. Verificar contraseña
+  const passwordMatch = await bcrypt.compare(password, user.password);
+  if (!passwordMatch)
+    return {
+      data: fields,
+      success: false,
+      message: "Invalid credentials",
+      dbErrors: { message: "Invalid credentials" },
+      validationErrors: null,
+    };
+
+  // 4. Crear sesión
+  await createSession(user.id);
+
+  // 5. Redirigir
   redirect("/dashboard");
 }
 

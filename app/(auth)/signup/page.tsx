@@ -1,10 +1,10 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState } from "react";
 import { signupWithCredentials } from "../actions/auth";
 import { FormState } from "@/lib/zod";
 import SignupFormError from "../components/field-error";
-import { useRouter } from "next/navigation";
+import CustomInput from "../components/custom-input";
 
 const INITIAL_STATE: FormState = {
   success: false,
@@ -24,56 +24,41 @@ export default function Signin() {
         action={formAction}
       >
         <h1 className="text-2xl font-bold text-center mb-6">Sign Up</h1>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Username
-          </label>
-          <input
-            defaultValue={formState.data?.username}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            name="username"
-            type="text"
-          />
+        <CustomInput
+          label="Username"
+          name={"username"}
+          type={"text"}
+          defaultValue={formState.data?.username}
+        >
           <SignupFormError error={formState.validationErrors?.username} />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Email
-          </label>
-          <input
-            defaultValue={formState.data?.email}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            name="email"
-            type="email"
-          />
+        </CustomInput>
+
+        <CustomInput
+          label="Email"
+          name={"email"}
+          type={"text"}
+          defaultValue={formState.data?.email}
+        >
           <SignupFormError error={formState.validationErrors?.email} />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Password
-          </label>
-          <input
-            defaultValue={formState.data?.password}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            name="password"
-            type="password"
-          />
+        </CustomInput>
+        <CustomInput
+          label="Password"
+          name={"password"}
+          type={"password"}
+          defaultValue={formState.data?.password}
+        >
           <SignupFormError error={formState.validationErrors?.password} />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Confirm pasword
-          </label>
-          <input
-            defaultValue={formState.data?.confirmPassword}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            name="confirmPassword"
-            type="password"
-          />
+        </CustomInput>
+        <CustomInput
+          label="Confirm password"
+          name={"confirmPassword"}
+          type={"password"}
+          defaultValue={formState.data?.confirmPassword}
+        >
           <SignupFormError
             error={formState.validationErrors?.confirmPassword}
           />
-        </div>
+        </CustomInput>
 
         <button
           disabled={pending}

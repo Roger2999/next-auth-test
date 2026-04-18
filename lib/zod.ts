@@ -52,3 +52,21 @@ export type FormState = {
     confirmPassword?: string[];
   } | null;
 };
+export type SigninFormState = {
+  data?: {
+    email: string;
+    password?: string;
+  };
+  success?: boolean;
+  message?: string;
+  dbErrors?: {
+    status?: number;
+    name?: string;
+    message?: string;
+    details?: Record<string, string[]>;
+  } | null;
+  validationErrors?: {
+    email?: string[];
+    password?: string[];
+  } | null;
+};

@@ -1,15 +1,16 @@
-import { logout } from "@/app/(auth)/actions/auth";
-import { getUser, verifySession } from "@/app/lib/dal";
+import { auth } from "@/app/lib/auth";
+import { redirect } from "next/navigation";
 
 export default async function Dashboard() {
-  await verifySession();
-  const user = await getUser();
+  const session = await auth.api.getSession();
+  
+  if (!session) {
+    redirect("/signin");
+  }
+  
   return (
     <div className="text-2xl text-black">
-      <h2>Welcome {user?.username}</h2>
-      <form action={logout}>
-        <button className="border rounded-md m-3">Cerrar session</button>
-      </form>
+      <h2>Welcome {session.user.name}</h2>
     </div>
   );
 }

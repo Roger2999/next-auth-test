@@ -1,39 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
-import { decrypt } from "@/app/lib/session";
-import { cookies } from "next/headers";
-
-// 1. Specify protected and public routes
+import { auth } from "@/app/lib/auth";
 
 const publicRoutes = ["/signin", "/signup", "/"];
 
 export default async function proxy(req: NextRequest) {
-  // 2. Check if the current route is protected or public
   const path = req.nextUrl.pathname;
   const isProtectedRoute = path.startsWith("/dashboard");
   const isPublicRoute = publicRoutes.includes(path);
 
-  // 3. Decrypt the session from the cookie
-  const cookie = (await cookies()).get("session")?.value;
-  const session = await decrypt(cookie);
+  const session = await auth.api.getSession({
+    headers: req.headers,
+  });
 
-  // 4. Redirect to /login if the user is not authenticated
-  if (isProtectedRoute && !session?.userId) {
+  if (isProtectedRoute && !session) {
     return NextResponse.redirect(new URL("/signin", req.nextUrl));
   }
 
-  // 5. Redirect to /dashboard if the user is authenticated
-  if (
-    isPublicRoute &&
-    session?.userId &&
-    !req.nextUrl.pathname.startsWith("/dashboard")
-  ) {
+  if (isPublicRoute && session && !req.nextUrl.pathname.startsWith("/dashboard")) {
     return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
   }
 
   return NextResponse.next();
 }
 
-// Routes Proxy should not run on
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+  matcher: ["/((?!api/auth|_next/static|_next/image|.*\\.png$).*)"],
 };

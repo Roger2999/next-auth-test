@@ -60,6 +60,20 @@ export default function Signin() {
           />
           <SignupFormError error={formState.validationErrors?.password} />
         </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Confirm pasword
+          </label>
+          <input
+            defaultValue={formState.data?.confirmPassword}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            name="confirmPassword"
+            type="password"
+          />
+          <SignupFormError
+            error={formState.validationErrors?.confirmPassword}
+          />
+        </div>
 
         <button
           disabled={pending}

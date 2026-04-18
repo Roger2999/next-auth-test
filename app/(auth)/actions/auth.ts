@@ -44,6 +44,7 @@ export async function signupWithCredentials(
     username: formData.get("username") as string,
     email: formData.get("email") as string,
     password: formData.get("password") as string,
+    confirmPassword: formData.get("confirmPassword") as string,
   };
   //validacion de campos
   const validateFields = SignupFormSchema.safeParse(fields);

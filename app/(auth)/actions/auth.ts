@@ -48,10 +48,6 @@ export async function signupWithCredentials(
   //validacion de campos
   const validateFields = SignupFormSchema.safeParse(fields);
   if (!validateFields.success) {
-    console.log(
-      "Validations errors",
-      z.flattenError(validateFields.error).fieldErrors,
-    );
     return {
       data: fields,
       success: false,

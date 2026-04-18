@@ -1,9 +1,11 @@
-import { auth } from "@/auth"
+import { getUser, verifySession } from "@/app/lib/dal";
 
 export default async function Dashboard() {
-  const session = await auth()
-  if (!session) {
-    return null
-  }
-  return <div className="">Dashboard</div>
+  await verifySession();
+  const user = await getUser();
+  return (
+    <div className="text-2xl text-black">
+      <h2>Welcome {user?.username}</h2>
+    </div>
+  );
 }

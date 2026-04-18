@@ -17,14 +17,6 @@ export default function Signin() {
     signupWithCredentials,
     INITIAL_STATE,
   );
-  const router = useRouter();
-
-  useEffect(() => {
-    if (formState.success) {
-      router.push("/signin");
-    }
-  }, [formState.success, router]);
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <form

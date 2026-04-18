@@ -1,6 +1,6 @@
 "use server";
 
-import { signIn, signOut } from "@/auth";
+// import { signIn, signOut } from "@/auth";
 
 import { FormState, SignupFormSchema } from "@/lib/zod";
 import prisma from "@/lib/prisma";
@@ -8,33 +8,34 @@ import { AuthError } from "next-auth";
 import z from "zod";
 import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
+
+import { createSession } from "@/app/lib/session";
 
 export type SignInState = {
   success?: boolean;
   error?: string;
 };
 
-export async function signInWithGitHub(
-  prevState: SignInState | null,
-  formData: FormData,
-): Promise<SignInState> {
-  try {
-    await signIn("github", { redirectTo: "/dashboard" });
-    return { success: true, error: undefined };
-  } catch (error) {
-    if (error instanceof AuthError) {
-      return {
-        success: false,
-        error: error.cause?.err?.message ?? "Failed to sign in",
-      };
-    }
-    return { success: false, error: "Failed to sign in with GitHub" };
-  }
-}
-export async function SignOut() {
-  await signOut({ redirectTo: "/" });
-}
+// export async function signInWithGitHub(
+//   prevState: SignInState | null,
+//   formData: FormData,
+// ): Promise<SignInState> {
+//   try {
+//     await signIn("github", { redirectTo: "/dashboard" });
+//     return { success: true, error: undefined };
+//   } catch (error) {
+//     if (error instanceof AuthError) {
+//       return {
+//         success: false,
+//         error: error.cause?.err?.message ?? "Failed to sign in",
+//       };
+//     }
+//     return { success: false, error: "Failed to sign in with GitHub" };
+//   }
+// }
+// export async function SignOut() {
+//   await signOut({ redirectTo: "/" });
+// }
 export async function signupWithCredentials(
   prevState: FormState,
   formData: FormData,
@@ -81,7 +82,7 @@ export async function signupWithCredentials(
     const hashedPassword = await bcrypt.hash(password, 10);
     //creacion de usuario en db
 
-    await prisma.user.create({
+    const user = await prisma.user.create({
       data: {
         email: email,
         username: username,
@@ -89,13 +90,7 @@ export async function signupWithCredentials(
       },
     });
 
-    return {
-      data: fields,
-      success: true,
-      message: "User created successfully",
-      dbErrors: null,
-      validationErrors: null,
-    };
+    await createSession(user.id);
   } catch (error) {
     console.error("Signup error:", error);
     const dbError = error as Error;
@@ -111,4 +106,10 @@ export async function signupWithCredentials(
       validationErrors: null,
     };
   }
+
+  redirect("/dashboard");
+}
+
+export async function deleteAllDbUser() {
+  await prisma.user.deleteMany({});
 }

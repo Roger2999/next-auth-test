@@ -1,12 +1,14 @@
 "use client";
 
 import { useActionState } from "react";
-import { signupWithCredentials } from "../actions/auth";
-import { FormState } from "@/lib/zod";
+
 import SignupFormError from "../components/field-error";
 import CustomInput from "../components/custom-input";
+import { SignupFormState } from "@/lib/zod";
+import { signupWithCredentials } from "../actions/auth";
 
-const INITIAL_STATE: FormState = {
+const INITIAL_STATE: SignupFormState = {
+  data: undefined,
   success: false,
   message: undefined,
   dbErrors: null,

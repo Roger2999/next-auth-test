@@ -30,7 +30,7 @@ export const SigninFormSchema = z.object({
 export type SignupFormValues = z.infer<typeof SignupFormSchema>;
 export type SigninFormValues = z.infer<typeof SigninFormSchema>;
 
-export type FormState = {
+export type SignupFormState = {
   data?: {
     username?: string;
     email: string;

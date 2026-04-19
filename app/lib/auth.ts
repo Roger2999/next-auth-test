@@ -11,11 +11,12 @@ export const auth = betterAuth({
     enabled: true,
   },
   plugins: [nextCookies()],
-  basePath: "/",
-  socialProviders: {
-    github: {
-      clientId: process.env.GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
-    },
-  },
+  socialProviders: process.env.GITHUB_CLIENT_ID
+    ? {
+        github: {
+          clientId: process.env.GITHUB_CLIENT_ID,
+          clientSecret: process.env.GITHUB_CLIENT_SECRET,
+        },
+      }
+    : undefined,
 });

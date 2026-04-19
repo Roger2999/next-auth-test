@@ -47,6 +47,7 @@ export default function LoginForm() {
       >
         {pending ? "Loading..." : "Sign In"}
       </button>
+      {formState.message==="email_not_verified"&&(<p>Email no verificado</p>)}
       {formState.dbErrors && (
         <p className="text-red-500 text-sm">{formState.dbErrors.message}</p>
       )}

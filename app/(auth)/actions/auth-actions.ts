@@ -50,8 +50,18 @@ export async function signupWithCredentials(
         },
         validationErrors: null,
       };
+    // return {
+    //   success: false,
+    //   message: undefined,
+    //   dbErrors: {
+    //     status: 404,
+    //     name: "dbError",
+    //     message: "Unexpected error",
+    //   },
+    //   validationErrors: null,
+    // };
   }
-  redirect("/dashboard");
+  redirect("/verify-email-sent");
 }
 export async function signinWithCredentials(
   prevState: SigninFormState,
@@ -75,20 +85,49 @@ export async function signinWithCredentials(
   try {
     await auth.api.signInEmail({
       body: { email, password, rememberMe: true },
-
       headers: await headers(),
     });
   } catch (error) {
-    if (error instanceof APIError)
+    if (error instanceof APIError) {
+      if (error.status === "FORBIDDEN") {
+        return {
+          message: "email_not_verified",
+        };
+      }
       return {
         data: fields,
         success: false,
         dbErrors: {
-          name: "Unknow error",
           message: error.message,
         },
         validationErrors: null,
       };
+    }
+    return {
+      data: fields,
+      success: false,
+      dbErrors: {
+        message: "Unexpected error",
+      },
+      validationErrors: null,
+    };
   }
   redirect("/dashboard");
 }
+// export async function sendVerifictationEmail(email: string) {
+//   try {
+//     await auth.api.sendVerificationEmail({
+//       body: {
+//         email,
+//         callbackURL: "/dashboard",
+//       },
+//     });
+//     return {
+//       success: true,
+//     };
+//   } catch (error) {
+//     if (error instanceof APIError) {
+//       return { message: error.message };
+//     }
+//   }
+// }

@@ -14,7 +14,7 @@ const INITIAL_STATE: SignupFormState = {
   dbErrors: null,
   validationErrors: null,
 };
-export default function Signin() {
+export default function Signup() {
   const [formState, formAction, pending] = useActionState(
     signupWithCredentials,
     INITIAL_STATE,

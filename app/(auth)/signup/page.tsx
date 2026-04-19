@@ -5,7 +5,7 @@ import { useActionState } from "react";
 import SignupFormError from "../components/field-error";
 import CustomInput from "../components/custom-input";
 import { SignupFormState } from "@/lib/zod";
-import { signupWithCredentials } from "../actions/auth";
+import { signupWithCredentials } from "../actions/auth-actions";
 
 const INITIAL_STATE: SignupFormState = {
   data: undefined,

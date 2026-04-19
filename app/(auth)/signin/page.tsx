@@ -1,5 +1,8 @@
+"use client";
+
 import { GalleryVerticalEndIcon } from "lucide-react";
-// import LoginForm from "../components/login-form";
+import { siginGitHUb } from "../services/signinWithGithub";
+import LoginForm from "../components/login-form";
 
 export default function SignIn() {
   return (
@@ -11,8 +14,9 @@ export default function SignIn() {
           </div>
           Acme Inc.
         </a>
-        {/* <LoginForm /> */}
+        <button onClick={siginGitHUb}>Sign in with GitHub</button>
       </div>
+      <LoginForm />
     </div>
   );
 }

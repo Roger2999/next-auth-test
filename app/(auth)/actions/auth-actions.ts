@@ -56,7 +56,7 @@ export async function signupWithCredentials(
 export async function signinWithCredentials(
   prevState: SigninFormState,
   formData: FormData,
-) {
+): Promise<SigninFormState> {
   const fields = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
@@ -74,7 +74,8 @@ export async function signinWithCredentials(
   const { email, password } = validateFields.data;
   try {
     await auth.api.signInEmail({
-      body: { email, password },
+      body: { email, password, rememberMe: true },
+
       headers: await headers(),
     });
   } catch (error) {
@@ -83,6 +84,7 @@ export async function signinWithCredentials(
         data: fields,
         success: false,
         dbErrors: {
+          name: "Unknow error",
           message: error.message,
         },
         validationErrors: null,

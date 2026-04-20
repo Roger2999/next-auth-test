@@ -11,15 +11,16 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: true,
-
+    autoSignIn: true,
   },
-
   emailVerification: {
+    sendOnSignIn: true,
     sendOnSignUp: true,
     autoSignInAfterVerification: true,
+    expiresIn: 3600,
     sendVerificationEmail: async ({ user, url }) => {
       void resend.emails.send({
-        from:"Auth app <onboarding@resend.dev>",
+        from: "onboarding@resend.dev",
         to: user.email,
         subject: "Verify your email address",
         html: `

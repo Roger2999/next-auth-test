@@ -43,19 +43,13 @@ export default function Signup() {
         >
           <SignupFormError error={formState.validationErrors?.email} />
         </CustomInput>
-        <CustomInput
-          label="Password"
-          name={"password"}
-          type={"password"}
-          defaultValue={formState.data?.password}
-        >
+        <CustomInput label="Password" name={"password"} type={"password"}>
           <SignupFormError error={formState.validationErrors?.password} />
         </CustomInput>
         <CustomInput
           label="Confirm password"
           name={"confirmPassword"}
           type={"password"}
-          defaultValue={formState.data?.confirmPassword}
         >
           <SignupFormError
             error={formState.validationErrors?.confirmPassword}
@@ -70,9 +64,6 @@ export default function Signup() {
         </button>
         {formState.dbErrors && (
           <p className="text-red-500 text-sm">{formState.dbErrors.message}</p>
-        )}
-        {!formState.dbErrors && formState.success && (
-          <p className="text-green-500 text-sm">{formState.message}</p>
         )}
       </form>
     </div>

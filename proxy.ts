@@ -16,7 +16,11 @@ export default async function proxy(req: NextRequest) {
     return NextResponse.redirect(new URL("/signin", req.nextUrl));
   }
 
-  if (isPublicRoute && session && !req.nextUrl.pathname.startsWith("/dashboard")) {
+  if (
+    isPublicRoute &&
+    session &&
+    !req.nextUrl.pathname.startsWith("/dashboard")
+  ) {
     return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
   }
 

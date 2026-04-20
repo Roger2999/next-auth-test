@@ -40,9 +40,9 @@ export type SignupFormState = {
   success?: boolean;
   message?: string;
   dbErrors?: {
-    status: number;
-    name: string;
-    message: string;
+    status?: number;
+    name?: string;
+    message?: string;
     details?: Record<string, string[]>;
   } | null;
   validationErrors?: {

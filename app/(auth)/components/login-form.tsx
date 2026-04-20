@@ -32,22 +32,16 @@ export default function LoginForm() {
       >
         <SignupFormError error={formState.validationErrors?.email} />
       </CustomInput>
-      <CustomInput
-        label="Password"
-        name={"password"}
-        type={"password"}
-        defaultValue={formState.data?.password}
-      >
+      <CustomInput label="Password" name={"password"} type={"password"}>
         <SignupFormError error={formState.validationErrors?.password} />
       </CustomInput>
-
       <button
         disabled={pending}
         className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:opacity-50"
       >
         {pending ? "Loading..." : "Sign In"}
       </button>
-      {formState.message==="email_not_verified"&&(<p>Email no verificado</p>)}
+      {formState.message === "email_not_verified" && <p>Email no verificado</p>}
       {formState.dbErrors && (
         <p className="text-red-500 text-sm">{formState.dbErrors.message}</p>
       )}

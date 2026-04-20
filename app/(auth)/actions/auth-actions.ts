@@ -8,7 +8,6 @@ import {
 } from "@/lib/zod";
 import { APIError } from "better-auth";
 import { headers } from "next/headers";
-
 import { redirect } from "next/navigation";
 import z from "zod";
 
@@ -25,7 +24,7 @@ export async function signupWithCredentials(
   const validateFields = SignupFormSchema.safeParse(fields);
   if (!validateFields.success) {
     return {
-      data: fields,
+      data: { email: fields.email, username: fields.username },
       message: "Validation error",
       success: false,
       dbErrors: null,
@@ -35,31 +34,31 @@ export async function signupWithCredentials(
   const { username, email, password } = validateFields.data;
   try {
     await auth.api.signUpEmail({
-      body: { name: username, email, password },
+      body: { name: username, email, password, callbackURL: "/dashboard" },
       headers: await headers(),
+      asResponse: true,
     });
   } catch (error) {
-    if (error instanceof APIError)
+    if (error instanceof APIError) {
       return {
-        data: fields,
+        data: { email, username },
         success: false,
         dbErrors: {
-          status: 404,
           name: "dbError",
           message: error.message,
         },
         validationErrors: null,
       };
-    // return {
-    //   success: false,
-    //   message: undefined,
-    //   dbErrors: {
-    //     status: 404,
-    //     name: "dbError",
-    //     message: "Unexpected error",
-    //   },
-    //   validationErrors: null,
-    // };
+    }
+    return {
+      data: { email, username },
+      success: false,
+      dbErrors: {
+        name: "db_Error",
+        message: "Unexpected error, try again",
+      },
+      validationErrors: null,
+    };
   }
   redirect("/verify-email-sent");
 }
@@ -74,7 +73,7 @@ export async function signinWithCredentials(
   const validateFields = SigninFormSchema.safeParse(fields);
   if (!validateFields.success) {
     return {
-      data: fields,
+      data: { email: fields.email },
       message: "Validation error",
       success: false,
       dbErrors: null,
@@ -95,7 +94,7 @@ export async function signinWithCredentials(
         };
       }
       return {
-        data: fields,
+        data: { email },
         success: false,
         dbErrors: {
           message: error.message,
@@ -104,7 +103,7 @@ export async function signinWithCredentials(
       };
     }
     return {
-      data: fields,
+      data: { email },
       success: false,
       dbErrors: {
         message: "Unexpected error",

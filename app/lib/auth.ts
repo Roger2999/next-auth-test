@@ -9,7 +9,7 @@ export const auth = betterAuth({
     provider: "postgresql",
   }),
   trustedOrigins: [
-    "https://auth-test-roger.vercel.app",
+    "https://next-auth-roger.vercel.app",
     "http://localhost:3000",
   ],
   emailAndPassword: {

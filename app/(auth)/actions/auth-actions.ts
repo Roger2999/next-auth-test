@@ -1,5 +1,6 @@
 "use server";
 import { auth } from "@/app/lib/auth";
+import prisma from "@/lib/prisma";
 import {
   SigninFormSchema,
   SigninFormState,
@@ -32,12 +33,42 @@ export async function signupWithCredentials(
     };
   }
   const { username, email, password } = validateFields.data;
+  const existingUser = await prisma.user.findFirst({
+    where: {
+      OR: [{ email }, { name: username }],
+    },
+  });
+  if (existingUser) {
+    return {
+      data: { email, username },
+      success: false,
+      dbErrors: {
+        name: "dbError",
+        message:
+          existingUser.email === email
+            ? "An account with this email already exists"
+            : "An account with this username already exists",
+      },
+      validationErrors: null,
+    };
+  }
   try {
-    await auth.api.signUpEmail({
-      body: { name: username, email, password, callbackURL: "/dashboard" },
+    const response = await auth.api.signUpEmail({
+      body: { name: username, email, password },
       headers: await headers(),
       asResponse: true,
     });
+    if (!("token" in response) || !response.token) {
+      return {
+        data: { email, username },
+        success: false,
+        dbErrors: {
+          name: "dbError",
+          message: "An account with this email or username already exists",
+        },
+        validationErrors: null,
+      };
+    }
   } catch (error) {
     if (error instanceof APIError) {
       return {
@@ -113,20 +144,20 @@ export async function signinWithCredentials(
   }
   redirect("/dashboard");
 }
-// export async function sendVerifictationEmail(email: string) {
-//   try {
-//     await auth.api.sendVerificationEmail({
-//       body: {
-//         email,
-//         callbackURL: "/dashboard",
-//       },
-//     });
-//     return {
-//       success: true,
-//     };
-//   } catch (error) {
-//     if (error instanceof APIError) {
-//       return { message: error.message };
-//     }
-//   }
-// }
+export async function sendVerifictationEmail(email: string) {
+  try {
+    await auth.api.sendVerificationEmail({
+      body: {
+        email,
+        callbackURL: "/dashboard",
+      },
+    });
+    return {
+      success: true,
+    };
+  } catch (error) {
+    if (error instanceof APIError) {
+      return { message: error.message };
+    }
+  }
+}

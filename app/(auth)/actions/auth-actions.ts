@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma";
 import {
   SigninFormSchema,
   SigninFormState,
+  SignoutState,
   SignupFormSchema,
   SignupFormState,
 } from "@/lib/zod";
@@ -144,20 +145,50 @@ export async function signinWithCredentials(
   }
   redirect("/dashboard");
 }
-export async function sendVerifictationEmail(email: string) {
+export async function signout(
+  prevState: SignoutState,
+  formData: FormData,
+): Promise<SignoutState> {
   try {
-    await auth.api.sendVerificationEmail({
-      body: {
-        email,
-        callbackURL: "/dashboard",
-      },
+    await auth.api.signOut({
+      headers: await headers(),
     });
-    return {
-      success: true,
-    };
   } catch (error) {
     if (error instanceof APIError) {
-      return { message: error.message };
+      return {
+        success: false,
+        message: "error",
+        errors: {
+          name: error.name,
+          message: error.body?.message,
+        },
+      };
     }
+    return {
+      success: false,
+      message: "error",
+      errors: {
+        name: "error",
+        message: "Unexpected error",
+      },
+    };
   }
+  redirect("/signin");
 }
+// export async function sendVerifictationEmail(email: string) {
+//   try {
+//     await auth.api.sendVerificationEmail({
+//       body: {
+//         email,
+//         callbackURL: "/dashboard",
+//       },
+//     });
+//     return {
+//       success: true,
+//     };
+//   } catch (error) {
+//     if (error instanceof APIError) {
+//       return { message: error.message };
+//     }
+//   }
+// }

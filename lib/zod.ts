@@ -70,3 +70,11 @@ export type SigninFormState = {
     password?: string[];
   } | null;
 };
+export type SignoutState = {
+  success?: boolean;
+  message?: string;
+  errors?: {
+    name?: string;
+    message?: string | undefined;
+  } | null;
+};

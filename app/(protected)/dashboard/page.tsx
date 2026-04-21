@@ -1,4 +1,6 @@
+import SignoutButton from "@/app/(auth)/components/signout-button";
 import { auth } from "@/lib/auth";
+
 import { headers } from "next/headers";
 import Image from "next/image";
 
@@ -21,6 +23,8 @@ export default async function Dashboard() {
           <Image src={session?.user?.image} alt="alt" fill priority />
         </div>
       )}
+
+      <SignoutButton />
     </div>
   );
 }

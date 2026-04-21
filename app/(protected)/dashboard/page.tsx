@@ -1,4 +1,4 @@
-import SignoutButton from "@/app/(auth)/components/signout-button";
+import SignoutButton from "@/components/signout-button";
 import { auth } from "@/lib/auth";
 
 import { headers } from "next/headers";

@@ -17,7 +17,7 @@ export default function NavMenuDesktop({
   onMenuChange: () => void;
 }) {
   return (
-    <nav className="sm:flex w-full h-14 border justify-between items-center">
+    <nav className="flex w-full h-14 border justify-between items-center">
       <ul className="hidden sm:flex gap-10 px-10">
         {routes.map((route, index) => (
           <li key={index}>
@@ -32,8 +32,12 @@ export default function NavMenuDesktop({
         <SignupButton />
         <SignoutButton />
       </div>
-      <Button className="relative z-20 sm:hidden" onClick={onMenuChange}>
-        <Menu></Menu>
+      <Button
+        variant={"outline"}
+        className="relative z-20 sm:hidden mx-10"
+        onClick={onMenuChange}
+      >
+        <Menu />
       </Button>
     </nav>
   );

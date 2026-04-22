@@ -15,6 +15,10 @@ export const SignupFormSchema = z
       .string()
       .min(8, "Minimo de 8 caracteres")
       .max(128, "No puede tener mas de 128 caracteres"),
+    image: z
+      .string()
+      .url()
+      .optional(),
   })
   .refine((data) => data.password == data.confirmPassword, {
     message: "Las contraseñas deben ser iguales",
@@ -36,6 +40,7 @@ export type SignupFormState = {
     email: string;
     password?: string;
     confirmPassword?: string;
+    image?: string;
   };
   success?: boolean;
   message?: string;
@@ -50,6 +55,7 @@ export type SignupFormState = {
     email?: string[];
     password?: string[];
     confirmPassword?: string[];
+    image?: string[];
   } | null;
 };
 export type SigninFormState = {

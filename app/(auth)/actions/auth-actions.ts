@@ -1,5 +1,5 @@
 "use server";
-import { auth } from "@/lib/auth";
+import { auth } from "@/app/lib/auth";
 import prisma from "@/lib/prisma";
 import {
   SigninFormSchema,
@@ -22,18 +22,22 @@ export async function signupWithCredentials(
     email: formData.get("email") as string,
     password: formData.get("password") as string,
     confirmPassword: formData.get("confirmPassword") as string,
+    image: (formData.get("image") as string) || undefined,
   };
   const validateFields = SignupFormSchema.safeParse(fields);
   if (!validateFields.success) {
     return {
-      data: { email: fields.email, username: fields.username },
+      data: {
+        email: fields.email,
+        username: fields.username,
+      },
       message: "Validation error",
       success: false,
       dbErrors: null,
       validationErrors: z.flattenError(validateFields.error).fieldErrors,
     };
   }
-  const { username, email, password } = validateFields.data;
+  const { username, email, password, image } = validateFields.data;
   const existingUser = await prisma.user.findFirst({
     where: {
       OR: [{ email }, { name: username }],
@@ -54,22 +58,11 @@ export async function signupWithCredentials(
     };
   }
   try {
-    const response = await auth.api.signUpEmail({
-      body: { name: username, email, password },
+    await auth.api.signUpEmail({
+      body: { name: username, email, password, image },
       headers: await headers(),
       asResponse: true,
     });
-    if (!("token" in response) || !response.token) {
-      return {
-        data: { email, username },
-        success: false,
-        dbErrors: {
-          name: "dbError",
-          message: "An account with this email or username already exists",
-        },
-        validationErrors: null,
-      };
-    }
   } catch (error) {
     if (error instanceof APIError) {
       return {
@@ -145,10 +138,7 @@ export async function signinWithCredentials(
   }
   redirect("/dashboard");
 }
-export async function signout(
-  prevState: SignoutState,
-  formData: FormData,
-): Promise<SignoutState> {
+export async function signout(prevState: SignoutState): Promise<SignoutState> {
   try {
     await auth.api.signOut({
       headers: await headers(),

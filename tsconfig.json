@@ -19,14 +19,6 @@
       }
     ],
     "paths": {
-      "@/components/*": ["./components/*"],
-      "@/generated/*": ["./app/generated/*"],
-      "@/lib/*": ["./app/lib/*"],
-      "@/lib/auth": ["./app/lib/auth"],
-      "@/lib/auth-client": ["./app/lib/auth-client"],
-      "@/lib/prisma": ["./lib/prisma"],
-      "@/lib/zod": ["./lib/zod"],
-      "@/lib/utils": ["./lib/utils"],
       "@/*": ["./*"]
     }
   },

@@ -26,17 +26,19 @@ export default function ImageUploadButton({ name, error }: Props) {
             endpoint="profileImage"
             appearance={{
               button: {
+                display: "flex",
+                flexDirection: "column",
                 width: "100%",
-                height: "100px",
-                backgroundColor: "#f9fafb",
+                height: "5rem",
                 border: "2px dashed #d1d5db",
                 borderRadius: "8px",
                 color: "#6b7280",
-                fontSize: "14px",
                 fontWeight: "500",
               },
               allowedContent: {
-                display: "none",
+                width: "100%",
+                textAlign: "center",
+                fontSize: "1rem",
               },
             }}
             // eslint-disable-next-line @typescript-eslint/no-explicit-any

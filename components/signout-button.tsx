@@ -1,6 +1,7 @@
 "use client";
 import { useActionState } from "react";
 import { signout } from "../app/(auth)/actions/auth-actions";
+import { authClient } from "@/app/lib/auth-client";
 
 export default function SignoutButton() {
   const INITIAL_STATE = {
@@ -9,6 +10,9 @@ export default function SignoutButton() {
     errors: undefined,
   };
   const [state, action, pending] = useActionState(signout, INITIAL_STATE);
+  const { data } = authClient.useSession();
+  if (!data) return null;
+
   return (
     <form action={action}>
       <button className="border rounded-md" disabled={pending}>

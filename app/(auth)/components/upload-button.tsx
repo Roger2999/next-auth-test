@@ -13,7 +13,7 @@ export default function ImageUploadButton({ name, error }: Props) {
   const [imageUrl, setImageUrl] = useState<string>("");
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-4">
       <label className="block text-sm font-medium text-gray-700">
         Profile photo
         <span className="text-gray-400 font-normal ml-1">(optional)</span>
@@ -28,7 +28,7 @@ export default function ImageUploadButton({ name, error }: Props) {
               button: {
                 display: "flex",
                 flexDirection: "column",
-                width: "100%",
+                maxWidth: "90%",
                 height: "5rem",
                 border: "2px dashed #d1d5db",
                 borderRadius: "8px",

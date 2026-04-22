@@ -1,7 +1,7 @@
-import SignupButton from "@/app/(auth)/components/signup-button";
-import SignoutButton from "../signout-button";
-import SigninButton from "@/app/(auth)/components/signin-button";
-import Link from "next/link";
+"use client";
+import { useState } from "react";
+import NavMenuDesktop from "./desktop/NavMenuDesktop";
+import NavMenuMobile from "./mobile/NavMenuMobile";
 
 export default function NavMenu() {
   const routes = [
@@ -9,20 +9,14 @@ export default function NavMenu() {
     { name: "contact", href: "/contact" },
     { name: "about us", href: "/about us" },
   ];
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const handleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
   return (
-    <nav className="flex w-full h-14 border justify-between items-center">
-      <ul className="flex gap-10 px-10">
-        {routes.map((route, index) => (
-          <Link href={route.href} className="hover:text-blue-500" key={index}>
-            {route.name}
-          </Link>
-        ))}
-      </ul>
-      <div className="flex gap-5 px-10">
-        <SigninButton />
-        <SignupButton />
-        <SignoutButton />
-      </div>
-    </nav>
+    <>
+      <NavMenuDesktop routes={routes} onMenuChange={handleMenu} />
+      <NavMenuMobile routes={routes} isMenuOpen={isMenuOpen} />
+    </>
   );
 }

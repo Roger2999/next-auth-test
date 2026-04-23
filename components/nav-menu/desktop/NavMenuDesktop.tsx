@@ -1,10 +1,11 @@
-import SignupButton from "@/app/(auth)/components/signup-button";
-
-import SigninButton from "@/app/(auth)/components/signin-button";
 import Link from "next/link";
-import SignoutButton from "@/components/signout-button";
+import SignoutButton from "@/app/(public)/(auth)/components/signout-button";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
+import SigninButton from "@/app/(public)/(auth)/components/signin-button";
+import SignupButton from "@/app/(public)/(auth)/components/signup-button";
+import LinkButton from "@/components/ui/link-button";
+import { ModeToggle } from "@/components/theme-botton";
 
 export default function NavMenuDesktop({
   routes,
@@ -21,20 +22,21 @@ export default function NavMenuDesktop({
       <ul className="hidden sm:flex gap-10 px-10">
         {routes.map((route, index) => (
           <li key={index}>
-            <Link href={route.href} className="hover:text-blue-500">
+            <LinkButton type="link" href={route.href}>
               {route.name}
-            </Link>
+            </LinkButton>
           </li>
         ))}
       </ul>
       <div className="hidden sm:flex gap-5 px-10">
-        <SigninButton />
-        <SignupButton />
-        <SignoutButton />
+        <ModeToggle />
+        <SignupButton className="px-5">Signup</SignupButton>
+        <SigninButton className="px-5">Signin</SigninButton>
+        <SignoutButton className="px-5">Signout</SignoutButton>
       </div>
       <Button
         variant={"outline"}
-        className="relative z-20 sm:hidden mx-10"
+        className="relative z-20 sm:hidden ml-5"
         onClick={onMenuChange}
       >
         <Menu />

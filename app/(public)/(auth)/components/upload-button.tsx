@@ -14,9 +14,9 @@ export default function ImageUploadButton({ name, error }: Props) {
 
   return (
     <div className="space-y-4">
-      <label className="block text-sm font-medium text-gray-700">
+      <label className="block text-sm font-medium">
         Profile photo
-        <span className="text-gray-400 font-normal ml-1">(optional)</span>
+        <span className="font-normal ml-1">(optional)</span>
       </label>
       <input type="hidden" name={name} value={imageUrl} />
 
@@ -27,12 +27,13 @@ export default function ImageUploadButton({ name, error }: Props) {
             appearance={{
               button: {
                 display: "flex",
+                textAlign: "center",
                 flexDirection: "column",
-                maxWidth: "90%",
+                width: "20rem",
+                maxWidth: "80%",
                 height: "5rem",
                 border: "2px dashed #d1d5db",
                 borderRadius: "8px",
-                color: "#6b7280",
                 fontWeight: "500",
               },
               allowedContent: {
@@ -41,8 +42,7 @@ export default function ImageUploadButton({ name, error }: Props) {
                 fontSize: "1rem",
               },
             }}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            onClientUploadComplete={(res: any) => {
+            onClientUploadComplete={(res) => {
               if (res?.[0]?.url) {
                 setImageUrl(res[0].url);
               }

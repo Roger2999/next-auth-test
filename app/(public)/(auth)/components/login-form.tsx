@@ -20,7 +20,7 @@ export default function LoginForm() {
   );
   return (
     <form
-      className="w-full max-w-md p-8 bg-white rounded-lg shadow-md space-y-4"
+      className="w-full max-w-md p-8 rounded-lg shadow-md space-y-4"
       action={formAction}
     >
       <h1 className="text-2xl font-bold text-center mb-6">Sign In</h1>

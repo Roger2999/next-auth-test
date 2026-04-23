@@ -5,9 +5,9 @@ import NavMenuMobile from "./mobile/NavMenuMobile";
 
 export default function NavMenu() {
   const routes = [
-    { name: "home", href: "/" },
-    { name: "contact", href: "/contact" },
-    { name: "about us", href: "/about us" },
+    { name: "Home", href: "/" },
+    { name: "Contact", href: "/contact" },
+    { name: "About us", href: "/about" },
   ];
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const handleMenu = () => {

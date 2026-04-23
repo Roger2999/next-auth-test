@@ -15,10 +15,10 @@ export default async function Dashboard() {
   }
 
   return (
-    <div className="text-2xl text-black">
+    <div className="text-2xl">
       <h2>Welcome {session.user.name}</h2>
       {session && session.user.image && (
-        <div className="relative">
+        <div className="relative w-100 h-100">
           <Image src={session?.user?.image} alt="alt" fill priority />
         </div>
       )}

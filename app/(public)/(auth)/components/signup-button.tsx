@@ -17,11 +17,15 @@ export default function SignupButton({
   const baseStyles =
     "bg-btn border rounded-md p-1 border-black/20 hover:text-gray-800";
   return (
-    <Link
-      href={"/signup"}
-      className={cn(`bg-background ${baseStyles}`, className)}
-    >
-      {children ? children : "label"}
-    </Link>
+    <>
+      {!data && (
+        <Link
+          href={"/signup"}
+          className={cn(`bg-background ${baseStyles}`, className)}
+        >
+          {children ? children : "label"}
+        </Link>
+      )}
+    </>
   );
 }

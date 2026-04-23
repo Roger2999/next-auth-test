@@ -13,15 +13,17 @@ export default function SignupButton({
 }) {
   const { data } = authClient.useSession();
   const [state, action, pending] = useActionState(signout, {});
-
-  if (!data) return null;
   const baseStyles =
     "border bg-btn rounded-md p-1 border-black/20 hover:text-gray-800";
   return (
-    <form action={action}>
-      <button className={cn(baseStyles, className)}>
-        {pending ? "Loading..." : "Signout"}
-      </button>
-    </form>
+    <>
+      {data && (
+        <form action={action}>
+          <button className={cn(baseStyles, className)}>
+            {pending ? "Loading..." : "Signout"}
+          </button>
+        </form>
+      )}
+    </>
   );
 }

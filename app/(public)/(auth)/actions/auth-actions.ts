@@ -38,7 +38,9 @@ export async function signupWithCredentials(
     };
   }
   const { username, email, password, image } = validateFields.data;
-  !image ? image === "https://via.placeholder.com/300x200" : image;
+
+  const profilePhoto = image ? image : "https://via.placeholder.com/300x200";
+
   const existingUser = await prisma.user.findFirst({
     where: {
       OR: [{ email }, { name: username }],
@@ -60,7 +62,7 @@ export async function signupWithCredentials(
   }
   try {
     await auth.api.signUpEmail({
-      body: { name: username, email, password, image },
+      body: { name: username, email, password, image: profilePhoto },
       headers: await headers(),
       asResponse: true,
     });

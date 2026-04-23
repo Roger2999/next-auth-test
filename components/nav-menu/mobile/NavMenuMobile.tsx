@@ -18,7 +18,7 @@ export default function NavMenuMobile({
 }) {
   if (!isMenuOpen) return null;
   return (
-    <aside className="flex flex-col gap-5 absolute top-0 z-10 left-0 w-72 max-w-[70%] bg-sidebar-accent border h-full  sm:hidden px-5 pt-20 bg-">
+    <aside className="flex flex-col gap-5 absolute top-0 z-10 left-0 w-72 max-w-[70%] backdrop-blur-xl bg-white/10 border h-full  sm:hidden px-5 pt-20 bg-">
       <ul className="space-y-3">
         {routes.map((route, index) => (
           <li key={index}>

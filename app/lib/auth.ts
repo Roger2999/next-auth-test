@@ -8,6 +8,14 @@ export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
+  socialProviders: process.env.GITHUB_CLIENT_ID
+    ? {
+        github: {
+          clientId: process.env.GITHUB_CLIENT_ID,
+          clientSecret: process.env.GITHUB_CLIENT_SECRET,
+        },
+      }
+    : undefined,
   trustedOrigins: [
     "https://next-auth-roger.vercel.app",
     "http://localhost:3000",
@@ -38,14 +46,7 @@ export const auth = betterAuth({
     },
   },
   plugins: [nextCookies()],
-  socialProviders: process.env.GITHUB_CLIENT_ID
-    ? {
-        github: {
-          clientId: process.env.GITHUB_CLIENT_ID,
-          clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        },
-      }
-    : undefined,
+
   onAPIError: {
     errorURL: "/signin?error=auth_failed",
   },

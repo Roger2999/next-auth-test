@@ -15,10 +15,7 @@ export const SignupFormSchema = z
       .string()
       .min(8, "Minimo de 8 caracteres")
       .max(128, "No puede tener mas de 128 caracteres"),
-    image: z
-      .string()
-      .url()
-      .optional(),
+    image: z.url().optional(),
   })
   .refine((data) => data.password == data.confirmPassword, {
     message: "Las contraseñas deben ser iguales",

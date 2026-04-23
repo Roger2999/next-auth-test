@@ -40,6 +40,7 @@ export default function ImageUploadButton({ name, error }: Props) {
                 width: "100%",
                 textAlign: "center",
                 fontSize: "1rem",
+                cursor: "pointer",
               },
             }}
             onClientUploadComplete={(res) => {
@@ -53,7 +54,7 @@ export default function ImageUploadButton({ name, error }: Props) {
           />
         </div>
       ) : (
-        <div className="flex flex-col items-center gap-4 p-4 bg-gray-50 rounded-lg">
+        <div className="flex flex-col items-center gap-4 p-4 rounded-lg">
           <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow-md">
             <Image
               src={imageUrl}

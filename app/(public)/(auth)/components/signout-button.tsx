@@ -1,24 +1,27 @@
 "use client";
 import { authClient } from "@/app/lib/auth-client";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { ReactNode } from "react";
+
+import { ReactNode, useActionState } from "react";
+import { signout } from "../actions/auth-actions";
 
 export default function SignupButton({
-  children,
   className,
 }: {
   children: ReactNode;
   className?: string;
 }) {
   const { data } = authClient.useSession();
+  const [state, action, pending] = useActionState(signout, {});
 
   if (!data) return null;
   const baseStyles =
     "border bg-btn rounded-md p-1 border-black/20 hover:text-gray-800";
   return (
-    <Link href={"/signout"} className={cn(baseStyles, className)}>
-      {children ? children : "label"}
-    </Link>
+    <form action={action}>
+      <button className={cn(baseStyles, className)}>
+        {pending ? "Loading..." : "Signout"}
+      </button>
+    </form>
   );
 }

@@ -16,7 +16,11 @@ export default function NavMenu() {
   return (
     <>
       <NavMenuDesktop routes={routes} onMenuChange={handleMenu} />
-      <NavMenuMobile routes={routes} isMenuOpen={isMenuOpen} />
+      <NavMenuMobile
+        routes={routes}
+        isMenuOpen={isMenuOpen}
+        onChangeMenu={setIsMenuOpen}
+      />
     </>
   );
 }

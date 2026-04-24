@@ -3,7 +3,8 @@ import HomeCard from "@/components/home-card/home-card";
 export default function Home() {
   const stack = ["Better auth", "Prisma", "Resend"];
   const features = [
-    "Registro y login",
+    "Registro y login con credenciales",
+    "Login con Github",
     "Sesión persistente",
     "Rutas protegidas",
     "Encriptación de datos sensibles",

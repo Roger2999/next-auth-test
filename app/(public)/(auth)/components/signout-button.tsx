@@ -13,8 +13,7 @@ export default function SignupButton({
 }) {
   const { data } = authClient.useSession();
   const [state, action, pending] = useActionState(signout, {});
-  const baseStyles =
-    "border bg-btn rounded-md p-1 border-black/20 hover:text-gray-800";
+  const baseStyles = "border bg-white/20 rounded-md p-1 border-black/20";
   return (
     <>
       {data && (

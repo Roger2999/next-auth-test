@@ -14,8 +14,7 @@ export default function SignupButton({
   const { data } = authClient.useSession();
 
   if (data) return null;
-  const baseStyles =
-    "bg-btn border rounded-md p-1 border-black/20 hover:text-gray-800";
+  const baseStyles = "bg-white/20 border rounded-md p-1 border-black/20";
   return (
     <>
       {!data && (

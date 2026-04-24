@@ -19,7 +19,7 @@ export default function NavMenuDesktop({
 }) {
   return (
     <nav className="flex w-full h-14 border justify-between items-center">
-      <ul className="hidden sm:flex gap-10 px-10">
+      <ul className="hidden sm:flex gap-6 pl-10">
         {routes.map((route, index) => (
           <li key={index}>
             <LinkButton type="link" href={route.href}>
@@ -28,7 +28,7 @@ export default function NavMenuDesktop({
           </li>
         ))}
       </ul>
-      <div className="hidden sm:flex gap-5 px-10">
+      <div className="hidden sm:flex gap-5 pr-10">
         <ModeToggle />
         <SignupButton className="px-5">Signup</SignupButton>
         <SigninButton className="px-5">Signin</SigninButton>

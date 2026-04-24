@@ -4,7 +4,7 @@ interface Props {
 }
 export default function HomeCard({ title, items }: Props) {
   return (
-    <div className="space-y-5 py-5 px-8 sm:px-10 border border-white/40 shadow-2xl rounded-md backdrop-blur-xl w-100 max-w-[90%]">
+    <div className="space-y-5 py-5 px-8 sm:px-10 border border-white/40 shadow-2xl rounded-md backdrop-blur-xl">
       <h2>{title ? title : "title"}:</h2>
       <ul className="grid grid-cols-2 sm:grid-cols-3 gap-5">
         {items?.map((item) => (

@@ -29,7 +29,7 @@ export default function NavMenuMobile({
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        onChangeMenu(false);
+        closeMenu();
       }
     };
     if (isMenuOpen) {
@@ -49,14 +49,14 @@ export default function NavMenuMobile({
         <ul className="space-y-3">
           {routes.map((route, index) => (
             <li key={index}>
-              <LinkButton type="link" href={route.href}>
+              <LinkButton type="link" href={route.href} onClick={closeMenu}>
                 {route.name}
               </LinkButton>
             </li>
           ))}
         </ul>
         <Separator />
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5" onClick={closeMenu}>
           <SignupButton className="text-center">Signup</SignupButton>
           <SigninButton className="text-center">Signin</SigninButton>
           <SignoutButton className="text-center">Signout</SignoutButton>

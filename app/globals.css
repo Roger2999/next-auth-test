@@ -6,8 +6,9 @@
 
 @theme inline {
   --color-background: var(--background);
-  --color-btn: var(--btn);
   --color-foreground: var(--foreground);
+  --color-success: var(--success);
+  --color-btn: var(--btn);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
@@ -63,6 +64,8 @@
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
+  --success: oklch(32.169% 0.10041 142.003);
+  --success-foreground: oklch(79.553% 0.24979 141.979);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
@@ -99,6 +102,8 @@
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
+  --success: oklch(85.451% 0.28507 142.932);
+  --success-foreground: oklch(34.194% 0.10572 141.952);
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);

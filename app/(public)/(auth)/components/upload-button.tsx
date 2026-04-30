@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { UploadButton } from "@/app/utils/uploadthing";
+import { Json, UploadThingError } from "@uploadthing/shared";
 
 interface Props {
   name: string;
@@ -11,14 +12,14 @@ interface Props {
 
 export default function ImageUploadButton({ name, error }: Props) {
   const [imageUrl, setImageUrl] = useState<string>("");
-
+  const [uploadError, setUploadError] = useState<UploadThingError<Json>>();
   return (
     <div className="space-y-4">
-      <label className="block text-sm font-medium">
+      <label htmlFor="profilePhoto" className="block text-sm font-medium">
         Profile photo
         <span className="font-normal ml-1">(optional)</span>
       </label>
-      <input type="hidden" name={name} value={imageUrl} />
+      <input id="profilePhoto" type="hidden" name={name} value={imageUrl} />
 
       {!imageUrl ? (
         <div className="flex justify-center">
@@ -48,8 +49,8 @@ export default function ImageUploadButton({ name, error }: Props) {
                 setImageUrl(res[0].url);
               }
             }}
-            onUploadError={(error: Error) => {
-              console.error("Upload error:", error.message);
+            onUploadError={(error) => {
+              setUploadError(error);
             }}
           />
         </div>
@@ -73,6 +74,9 @@ export default function ImageUploadButton({ name, error }: Props) {
         </div>
       )}
       {error && <p className="text-red-500 text-sm">{error[0]}</p>}
+      {uploadError && (
+        <p className="text-center text-red-500">{uploadError.message}</p>
+      )}
     </div>
   );
 }

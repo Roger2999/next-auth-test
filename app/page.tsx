@@ -1,4 +1,4 @@
-import HomeCard from "@/components/home-card/home-card";
+import HomeCard from "@/components/home-card";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRightIcon } from "lucide-react";
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center w-full gap-5 p-3 sm:p-10 h-full">
-      <div className="w-100 max-w-[90%] space-y-2">
+      <div className="flex flex-col gap-5 w-100 max-w-[90%]">
         <h1 className={`text-2xl`}>
           Bienvenido a mi proyecto de autenticación
         </h1>

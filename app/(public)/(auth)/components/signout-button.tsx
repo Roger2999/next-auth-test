@@ -21,6 +21,7 @@ export default function SignupButton({
           <button className={cn(baseStyles, className)}>
             {pending ? "Loading..." : "Signout"}
           </button>
+          {state.errors && <p>{state.errors.message}</p>}
         </form>
       )}
     </>

@@ -1,7 +1,6 @@
 "use client";
 import SigninButton from "@/app/(public)/(auth)/components/signin-button";
 import SignoutButton from "@/app/(public)/(auth)/components/signout-button";
-import Link from "next/link";
 import SignupButton from "@/app/(public)/(auth)/components/signup-button";
 import LinkButton from "@/components/ui/link-button";
 import { Separator } from "@/components/ui/separator";
@@ -16,6 +15,7 @@ export default function NavMenuMobile({
   routes: {
     name: string;
     href: string;
+    current: boolean;
   }[];
   isMenuOpen: boolean;
   onChangeMenu: Dispatch<SetStateAction<boolean>>;
@@ -41,10 +41,13 @@ export default function NavMenuMobile({
   }, [isMenuOpen, onChangeMenu]);
   if (!isMenuOpen) return null;
   return (
-    <div className="fixed top-0 z-30 w-full h-full overlay" onClick={closeMenu}>
+    <div
+      className="fixed top-0 z-20 w-full h-full overlay backdrop-blur-md sm:hidden"
+      onClick={closeMenu}
+    >
       <aside
         onClick={stopPropagation}
-        className="flex flex-col gap-5 absolute top-0 left-0 w-72 max-w-[70%] backdrop-blur-xl bg-white/10 border h-full  sm:hidden px-5 pt-20 bg-"
+        className={`flex flex-col z-50 gap-5 absolute top-0 left-0 w-72 max-w-[70%] backdrop-blur-3xl border h-full  sm:hidden px-5 pt-20 transition-all duration-150}`}
       >
         <ul className="space-y-3">
           {routes.map((route, index) => (

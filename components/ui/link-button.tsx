@@ -22,9 +22,8 @@ export default function LinkButton({
       {...props}
       type={type}
       className={cn(
-        baseStyles,
+        `${baseStyles}`,
         className,
-
         type === "neutral" &&
           "border rounded-md p-1 bg-gray-400 border-black/20 hover:text-gray-800",
         type === "destructive" &&

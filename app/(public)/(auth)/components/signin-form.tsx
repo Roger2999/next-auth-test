@@ -13,7 +13,7 @@ const INITIAL_STATE: SigninFormState = {
   dbErrors: null,
   validationErrors: null,
 };
-export default function LoginForm() {
+export default function SigninForm() {
   const [formState, formAction, pending] = useActionState(
     signinWithCredentials,
     INITIAL_STATE,
@@ -23,7 +23,6 @@ export default function LoginForm() {
       className="w-full max-w-md p-8 rounded-lg shadow-md space-y-4"
       action={formAction}
     >
-      <h1 className="text-2xl font-bold text-center mb-6">Sign In</h1>
       <CustomInput
         label="Email"
         name={"email"}

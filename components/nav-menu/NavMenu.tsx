@@ -46,19 +46,8 @@ export default function NavMenu() {
 
   return (
     <>
-      <NavMenuDesktop
-        isPending={isPending}
-        session={session}
-        routes={routes}
-        onMenuChange={handleMenu}
-      />
-      <NavMenuMobile
-        isPending={isPending}
-        session={session}
-        routes={routes}
-        isMenuOpen={isMenuOpen}
-        onChangeMenu={setIsMenuOpen}
-      />
+      <NavMenuDesktop isPending={isPending} session={session} routes={routes} onMenuChange={handleMenu} />
+      <NavMenuMobile isPending={isPending} session={session} routes={routes} isMenuOpen={isMenuOpen} onChangeMenu={setIsMenuOpen} />
     </>
   );
 }

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { authClient } from "@/app/lib/auth-client";
-import { z } from "zod";
 import { KeyRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,14 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-
-const ResetPasswordSchema = z.object({
-  password: z.string().min(8, "Mínimo 8 caracteres").max(128, "Máximo 128 caracteres"),
-  confirmPassword: z.string().min(8, "Mínimo 8 caracteres"),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Las contraseñas deben ser iguales",
-  path: ["confirmPassword"],
-});
+import { ResetPasswordSchema } from "@/lib/zod";
 
 export default function ResetPasswordPage() {
   const router = useRouter();
@@ -45,7 +37,10 @@ export default function ResetPasswordPage() {
     e.preventDefault();
     setDbError(null);
 
-    const validate = ResetPasswordSchema.safeParse({ password, confirmPassword });
+    const validate = ResetPasswordSchema.safeParse({
+      password,
+      confirmPassword,
+    });
     if (!validate.success) {
       setValidationErrors(
         validate.error.flatten().fieldErrors as {
@@ -120,7 +115,9 @@ export default function ResetPasswordPage() {
     return (
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-green-600">Contraseña actualizada</CardTitle>
+          <CardTitle className="text-green-600">
+            Contraseña actualizada
+          </CardTitle>
           <CardDescription>
             Tu contraseña ha sido cambiada exitosamente.
           </CardDescription>
@@ -141,9 +138,7 @@ export default function ResetPasswordPage() {
           <KeyRound className="size-5" />
           <CardTitle>Nueva contraseña</CardTitle>
         </div>
-        <CardDescription>
-          Ingresa tu nueva contraseña.
-        </CardDescription>
+        <CardDescription>Ingresa tu nueva contraseña.</CardDescription>
       </CardHeader>
       <CardContent>
         <form className="space-y-4" onSubmit={handleSubmit}>
@@ -153,7 +148,9 @@ export default function ResetPasswordPage() {
               id="password"
               type="password"
               value={password}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setPassword(e.target.value)
+              }
               className="mt-1"
             />
             {validationErrors?.password && (

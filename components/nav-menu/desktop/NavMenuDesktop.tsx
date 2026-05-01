@@ -7,16 +7,17 @@ import LinkButton from "@/components/ui/link-button";
 import { ModeToggle } from "@/components/theme-botton";
 import { cn } from "@/lib/utils";
 import { Route } from "../NavMenu";
+
 interface Props {
   routes: Route[];
   onMenuChange: () => void;
-  onCurrentChange: (id: string) => void;
+  isActive: (href: string) => boolean;
 }
 
 export default function NavMenuDesktop({
   routes,
   onMenuChange,
-  onCurrentChange,
+  isActive,
 }: Props) {
   return (
     <nav className="flex w-full h-14 border justify-between items-center">
@@ -24,11 +25,11 @@ export default function NavMenuDesktop({
         {routes.map((route) => (
           <li key={route.id}>
             <LinkButton
-              className={cn(route.current ? "border-b-4 border-gray-400" : "")}
+              // className={cn(
+              //   "",
+              //   isActive(route.href) ? "border-b-4 border-gray-600" : "",
+              // )}
               type="link"
-              onClick={() => {
-                onCurrentChange(route.id);
-              }}
               href={route.href}
             >
               {route.name}

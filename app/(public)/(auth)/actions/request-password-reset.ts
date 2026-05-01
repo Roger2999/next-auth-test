@@ -2,14 +2,9 @@
 
 import { auth } from "@/app/lib/auth";
 import { headers } from "next/headers";
-import { redirect } from "next/navigation";
 import { APIError } from "better-auth";
-import { SendEmailState } from "@/lib/zod";
+import { ForgotPasswordSchema, SendEmailState } from "@/lib/zod";
 import { z } from "zod";
-
-const ForgotPasswordSchema = z.object({
-  email: z.email("Email format invalid").min(1, "Campo requerido"),
-});
 
 export async function requestPasswordReset(
   prevState: SendEmailState,

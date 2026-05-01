@@ -2,6 +2,8 @@
 import { auth } from "@/app/lib/auth";
 import prisma from "@/lib/prisma";
 import {
+  SendEmailFormSchema,
+  SendEmailState,
   SigninFormSchema,
   SigninFormState,
   SignoutState,
@@ -168,20 +170,42 @@ export async function signout(prevState: SignoutState): Promise<SignoutState> {
   }
   redirect("/signin");
 }
-// export async function sendVerifictationEmail(email: string) {
-//   try {
-//     await auth.api.sendVerificationEmail({
-//       body: {
-//         email,
-//         callbackURL: "/dashboard",
-//       },
-//     });
-//     return {
-//       success: true,
-//     };
-//   } catch (error) {
-//     if (error instanceof APIError) {
-//       return { message: error.message };
-//     }
-//   }
-// }
+export async function sendVerificationEmail(
+  prevState: SendEmailState,
+  formData: FormData,
+): Promise<SendEmailState | undefined> {
+  const fields = { email: formData.get("email") as string };
+  const validateFields = SendEmailFormSchema.safeParse(fields);
+  if (!validateFields.success) {
+    return {
+      success: false,
+      message: "validation error",
+      dbErrors: null,
+      validationErrors: z.flattenError(validateFields.error).fieldErrors,
+    };
+  }
+  const { email } = validateFields.data;
+  try {
+    await auth.api.sendVerificationEmail({
+      body: {
+        email,
+        callbackURL: "/dashboard",
+      },
+    });
+    return {
+      success: true,
+      message: "success",
+      dbErrors: null,
+      validationErrors: null,
+    };
+  } catch (error) {
+    if (error instanceof APIError) {
+      return {
+        success: false,
+        message: "validation error",
+        dbErrors: { message: error.body?.message },
+        validationErrors: null,
+      };
+    }
+  }
+}

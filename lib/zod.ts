@@ -28,8 +28,12 @@ export const SigninFormSchema = z.object({
     .min(8, "Minimo de 8 caracteres")
     .max(128, "No puede tener mas de 128 caracteres"),
 });
+export const SendEmailFormSchema = z.object({
+  email: z.email("Email format invalid").min(1, "Campo requerido"),
+});
 export type SignupFormValues = z.infer<typeof SignupFormSchema>;
 export type SigninFormValues = z.infer<typeof SigninFormSchema>;
+export type SendEmailFormValues = z.infer<typeof SendEmailFormSchema>;
 
 export type SignupFormState = {
   data?: {
@@ -81,3 +85,18 @@ export type SignoutState = {
     message?: string | undefined;
   } | null;
 };
+export type SendEmailState =
+  | {
+      success?: boolean;
+      message?: string;
+      dbErrors?: {
+        status?: number;
+        name?: string;
+        message?: string;
+        details?: Record<string, string[]>;
+      } | null;
+      validationErrors?: {
+        email?: string[];
+      } | null;
+    }
+  | undefined;

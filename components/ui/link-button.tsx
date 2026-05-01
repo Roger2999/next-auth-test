@@ -13,9 +13,8 @@ export default function LinkButton({
   ...props
 }: Props) {
   const { data } = authClient.useSession();
-
-  if (data) return null;
   const baseStyles = "text-md p-1";
+  if (data) return null;
   return (
     <Link
       href={"/"}

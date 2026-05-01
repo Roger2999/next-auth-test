@@ -100,3 +100,15 @@ export type SendEmailState =
       } | null;
     }
   | undefined;
+export type ForgotPasswordState = {
+  success?: boolean;
+  message?: string;
+  dbErrors?: {
+    status?: number;
+    name?: string;
+    message?: string;
+  } | null;
+  validationErrors?: {
+    email?: string[];
+  } | null;
+};

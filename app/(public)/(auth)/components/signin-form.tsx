@@ -5,6 +5,7 @@ import { useActionState } from "react";
 
 import CustomInput from "./custom-input";
 import { signinWithCredentials } from "../actions/auth-actions";
+import Link from "next/link";
 
 const INITIAL_STATE: SigninFormState = {
   data: undefined,
@@ -34,6 +35,11 @@ export default function SigninForm() {
       <CustomInput label="Password" name={"password"} type={"password"}>
         <SignupFormError error={formState.validationErrors?.password} />
       </CustomInput>
+      <div className="text-right text-sm">
+        <Link href="/forgot-password" className="text-muted-foreground hover:underline">
+          ¿Olvidaste tu contraseña?
+        </Link>
+      </div>
       <button
         disabled={pending}
         className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:opacity-50"

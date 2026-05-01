@@ -24,6 +24,23 @@ export const auth = betterAuth({
     enabled: true,
     requireEmailVerification: true,
     autoSignIn: true,
+    sendResetPassword: async ({ user, url }) => {
+      void resend.emails.send({
+        from: "onboarding@resend.dev",
+        to: user.email,
+        subject: "Reset your password",
+        html: `
+          <h2>Recupera tu contraseña</h2>
+          <p>Haz clic en el enlace para resetear tu contraseña:</p>
+          <a href="${url}">Resetear contraseña</a>
+          <p>El enlace expira en 1 hora.</p>
+        `,
+        text: `Click the link to reset your password: ${url}`,
+      });
+    },
+    onPasswordReset: async ({ user }) => {
+      console.log(`Password for ${user.email} has been reset.`);
+    },
   },
   emailVerification: {
     sendOnSignIn: true,

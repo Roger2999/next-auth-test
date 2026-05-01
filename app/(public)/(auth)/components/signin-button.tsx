@@ -13,13 +13,12 @@ export default function SigninButton({
 }) {
   const { data } = authClient.useSession();
   const baseStyles = "border bg-white/20 rounded-md p-1 border-black/20";
+  if (data) return null;
   return (
     <>
-      {!data && (
-        <Link href={"/signin"} className={cn(baseStyles, className)}>
-          {children ? children : "label"}
-        </Link>
-      )}
+      <Link href={"/signin"} className={cn(baseStyles, className)}>
+        {children ? children : "label"}
+      </Link>
     </>
   );
 }

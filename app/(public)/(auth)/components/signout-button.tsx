@@ -14,16 +14,15 @@ export default function SignoutButton({
   const { data } = authClient.useSession();
   const [state, action, pending] = useActionState(signout, {});
   const baseStyles = "border bg-white/20 rounded-md p-1 border-black/20";
+  if (!data) return null;
   return (
     <>
-      {data && (
-        <form action={action}>
-          <button className={cn(baseStyles, className)}>
-            {pending ? "Loading..." : "Signout"}
-          </button>
-          {state.errors && <p>{state.errors.message}</p>}
-        </form>
-      )}
+      <form action={action}>
+        <button className={cn(baseStyles, className)}>
+          {pending ? "Loading..." : "Signout"}
+        </button>
+        {state.errors && <p>{state.errors.message}</p>}
+      </form>
     </>
   );
 }

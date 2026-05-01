@@ -5,33 +5,21 @@ import SigninButton from "@/app/(public)/(auth)/components/signin-button";
 import SignupButton from "@/app/(public)/(auth)/components/signup-button";
 import LinkButton from "@/components/ui/link-button";
 import { ModeToggle } from "@/components/theme-botton";
-import { cn } from "@/lib/utils";
+
 import { Route } from "../NavMenu";
 
 interface Props {
   routes: Route[];
   onMenuChange: () => void;
-  isActive: (href: string) => boolean;
 }
 
-export default function NavMenuDesktop({
-  routes,
-  onMenuChange,
-  isActive,
-}: Props) {
+export default function NavMenuDesktop({ routes, onMenuChange }: Props) {
   return (
     <nav className="flex w-full h-14 border justify-between items-center">
       <ul className="hidden sm:flex gap-6 pl-10">
         {routes.map((route) => (
           <li key={route.id}>
-            <LinkButton
-              // className={cn(
-              //   "",
-              //   isActive(route.href) ? "border-b-4 border-gray-600" : "",
-              // )}
-              type="link"
-              href={route.href}
-            >
+            <LinkButton type="link" href={route.href}>
               {route.name}
             </LinkButton>
           </li>

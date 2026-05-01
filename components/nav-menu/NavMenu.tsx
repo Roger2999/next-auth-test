@@ -21,17 +21,10 @@ export default function NavMenu() {
   const handleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-  // const isActive = (href: string) => {
-  //   if (href === "/") return router.pathname === "/";
-  //   return router.pathname.startsWith(href);
-  // };
+
   return (
     <>
-      <NavMenuDesktop
-        // isActive={}
-        routes={routes}
-        onMenuChange={handleMenu}
-      />
+      <NavMenuDesktop routes={routes} onMenuChange={handleMenu} />
       <NavMenuMobile
         routes={routes}
         isMenuOpen={isMenuOpen}

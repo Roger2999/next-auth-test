@@ -13,6 +13,7 @@ import {
 import { APIError } from "better-auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import z from "zod";
 
 export async function signupWithCredentials(
@@ -141,6 +142,7 @@ export async function signinWithCredentials(
       validationErrors: null,
     };
   }
+  revalidatePath("/", "page");
   redirect("/dashboard");
 }
 export async function signout(prevState: SignoutState): Promise<SignoutState> {
@@ -168,6 +170,7 @@ export async function signout(prevState: SignoutState): Promise<SignoutState> {
       },
     };
   }
+  revalidatePath("/", "page");
   redirect("/signin");
 }
 export async function sendVerificationEmail(

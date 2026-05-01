@@ -12,9 +12,8 @@ export default function SignupButton({
   className?: string;
 }) {
   const { data } = authClient.useSession();
-
-  if (data) return null;
   const baseStyles = "bg-white/20 border rounded-md p-1 border-black/20";
+
   return (
     <>
       {!data && (

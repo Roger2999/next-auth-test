@@ -12,7 +12,6 @@ export default function SigninButton({
   className?: string;
 }) {
   const { data } = authClient.useSession();
-
   const baseStyles = "border bg-white/20 rounded-md p-1 border-black/20";
   return (
     <>

@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { ReactNode, useActionState } from "react";
 import { signout } from "../actions/auth-actions";
 
-export default function SignupButton({
+export default function SignoutButton({
   className,
 }: {
   children: ReactNode;

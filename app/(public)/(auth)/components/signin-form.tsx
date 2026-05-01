@@ -36,7 +36,10 @@ export default function SigninForm() {
         <SignupFormError error={formState.validationErrors?.password} />
       </CustomInput>
       <div className="text-right text-sm">
-        <Link href="/forgot-password" className="text-muted-foreground hover:underline">
+        <Link
+          href="/forgot-password"
+          className="text-muted-foreground hover:underline"
+        >
           ¿Olvidaste tu contraseña?
         </Link>
       </div>
@@ -46,9 +49,13 @@ export default function SigninForm() {
       >
         {pending ? "Loading..." : "Sign In"}
       </button>
-      {formState.message === "email_not_verified" && <p>Email no verificado</p>}
+      {formState.message === "email_not_verified" && (
+        <p className="text-center">Email no verificado</p>
+      )}
       {formState.dbErrors && (
-        <p className="text-red-500 text-sm">{formState.dbErrors.message}</p>
+        <p className="text-red-500 text-sm text-center">
+          {formState.dbErrors.message}
+        </p>
       )}
     </form>
   );

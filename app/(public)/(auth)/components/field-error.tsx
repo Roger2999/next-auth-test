@@ -8,7 +8,7 @@ export default function SignupFormError({
   return (
     <div>
       {error?.map((err, index) => (
-        <p key={index} className="text-red-500 text-xs mt-1">
+        <p key={index} className="mt-1 text-xs text-red-500">
           {err}
         </p>
       ))}

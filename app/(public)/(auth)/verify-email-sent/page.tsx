@@ -56,13 +56,13 @@ export default function VerifyEmailSentPage() {
           </Button>
 
           {showSuccess && (
-            <p className="text-green-600 text-sm text-center">
+            <p className="text-center text-sm text-green-600">
               Correo enviado exitosamente
             </p>
           )}
 
           {showDbError && (
-            <p className="text-destructive text-sm text-center">
+            <p className="text-destructive text-center text-sm">
               {formState.dbErrors?.message || "Email no encontrado"}
             </p>
           )}

@@ -24,13 +24,13 @@ export default function LinkButton({
         `${baseStyles}`,
         className,
         type === "neutral" &&
-          "border rounded-md p-1 bg-gray-400 border-black/20 hover:text-gray-800",
+          "rounded-md border border-black/20 bg-gray-400 p-1 hover:text-gray-800",
         type === "destructive" &&
-          "border rounded-md p-1 bg-gray-400 border-black/20 hover:text-gray-800",
+          "rounded-md border border-black/20 bg-gray-400 p-1 hover:text-gray-800",
         type === "success" &&
-          "border rounded-md p-1 bg-gray-400 border-black/20 hover:text-gray-800",
+          "rounded-md border border-black/20 bg-gray-400 p-1 hover:text-gray-800",
         type === "link" &&
-          "hover:border-b-4 hover:border-b-gray-700 hover:text-blue-600 transition-all duration-100",
+          "transition-all duration-100 hover:border-b-4 hover:border-b-gray-700 hover:text-blue-600",
       )}
     >
       {children ? children : "label"}

@@ -12,19 +12,19 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col items-center w-full gap-5 p-3 sm:p-10 h-full">
-      <div className="flex flex-col gap-5 w-100 max-w-[90%]">
+    <div className="flex h-full w-full flex-col items-center gap-5 p-3 sm:p-10">
+      <div className="flex w-100 max-w-[90%] flex-col gap-5">
         <h1 className={`text-2xl`}>
           Bienvenido a mi proyecto de autenticación
         </h1>
         <Card>
-          <CardContent className=" space-y-2 text-success">
-            <div className="flex gap-2 text-md">
+          <CardContent className="text-success space-y-2">
+            <div className="text-md flex gap-2">
               <ArrowRightIcon />
               Registrate y confirma tu email, luego inicias sesión
               automáticamente.
             </div>
-            <div className=" flex gap-2 text-md">
+            <div className="text-md flex gap-2">
               <ArrowRightIcon />
               Inicia sesión con tus credenciales o con tu cuenta de Github
             </div>

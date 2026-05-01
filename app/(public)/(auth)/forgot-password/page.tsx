@@ -56,20 +56,19 @@ export default function ForgotPasswordPage() {
           </Button>
 
           {showSuccess && (
-            <p className="text-green-600 text-sm text-center">
+            <p className="text-center text-sm text-green-600">
               Revisa tu correo para resetear tu contraseña
             </p>
           )}
 
           {showError && (
-            <p className="text-destructive text-sm text-center">
-              {formState.dbErrors?.message ||
-                formState.validationErrors?.email}
+            <p className="text-destructive text-center text-sm">
+              {formState.dbErrors?.message || formState.validationErrors?.email}
             </p>
           )}
         </form>
 
-        <p className="text-center text-sm mt-4 text-muted-foreground">
+        <p className="text-muted-foreground mt-4 text-center text-sm">
           <Link href="/signin" className="hover:underline">
             Volver a iniciar sesión
           </Link>

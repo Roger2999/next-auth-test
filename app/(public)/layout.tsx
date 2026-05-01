@@ -4,7 +4,7 @@ export default function PublicLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex flex-col items-center justify-center gap-5 py-8 px-0 md:p-10 w-full">
+    <div className="flex w-full flex-col items-center justify-center gap-5 px-0 py-8 md:p-10">
       {children}
     </div>
   );

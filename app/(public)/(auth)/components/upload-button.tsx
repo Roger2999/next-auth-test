@@ -17,7 +17,7 @@ export default function ImageUploadButton({ name, error }: Props) {
     <div className="space-y-4">
       <label htmlFor="profilePhoto" className="block text-sm font-medium">
         Profile photo
-        <span className="font-normal ml-1">(optional)</span>
+        <span className="ml-1 font-normal">(optional)</span>
       </label>
       <input id="profilePhoto" type="hidden" name={name} value={imageUrl} />
 
@@ -55,8 +55,8 @@ export default function ImageUploadButton({ name, error }: Props) {
           />
         </div>
       ) : (
-        <div className="flex flex-col items-center gap-4 p-4 rounded-lg">
-          <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow-md">
+        <div className="flex flex-col items-center gap-4 rounded-lg p-4">
+          <div className="relative h-28 w-28 overflow-hidden rounded-full border-4 border-white shadow-md">
             <Image
               src={imageUrl}
               alt="Profile preview"
@@ -67,13 +67,13 @@ export default function ImageUploadButton({ name, error }: Props) {
           <button
             type="button"
             onClick={() => setImageUrl("")}
-            className="text-sm text-red-500 hover:text-red-700 font-medium"
+            className="text-sm font-medium text-red-500 hover:text-red-700"
           >
             Remove photo
           </button>
         </div>
       )}
-      {error && <p className="text-red-500 text-sm">{error[0]}</p>}
+      {error && <p className="text-sm text-red-500">{error[0]}</p>}
       {uploadError && (
         <p className="text-center text-red-500">{uploadError.message}</p>
       )}

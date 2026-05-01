@@ -21,7 +21,7 @@ export default function SigninForm() {
   );
   return (
     <form
-      className="w-full max-w-md p-8 rounded-lg shadow-md space-y-4"
+      className="w-full max-w-md space-y-4 rounded-lg p-8 shadow-md"
       action={formAction}
     >
       <CustomInput
@@ -45,7 +45,7 @@ export default function SigninForm() {
       </div>
       <button
         disabled={pending}
-        className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:opacity-50"
+        className="w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:opacity-50"
       >
         {pending ? "Loading..." : "Sign In"}
       </button>
@@ -53,7 +53,7 @@ export default function SigninForm() {
         <p className="text-center">Email no verificado</p>
       )}
       {formState.dbErrors && (
-        <p className="text-red-500 text-sm text-center">
+        <p className="text-center text-sm text-red-500">
           {formState.dbErrors.message}
         </p>
       )}

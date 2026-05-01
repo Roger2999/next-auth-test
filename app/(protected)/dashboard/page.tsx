@@ -18,7 +18,7 @@ export default async function Dashboard() {
     <div className="text-2xl">
       <h2>Welcome {session.user.name}</h2>
       {session && session.user.image && (
-        <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-md">
+        <div className="relative h-32 w-32 overflow-hidden rounded-full border-4 border-white shadow-md">
           <Image
             src={session?.user?.image}
             alt="alt"

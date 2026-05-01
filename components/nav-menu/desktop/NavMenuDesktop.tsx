@@ -6,17 +6,24 @@ import SignupButton from "@/app/(public)/(auth)/components/signup-button";
 import LinkButton from "@/components/ui/link-button";
 import { ModeToggle } from "@/components/theme-botton";
 
-import { Route } from "../NavMenu";
+import { Route, Session } from "../NavMenu";
 
 interface Props {
+  session: Session | null;
   routes: Route[];
   onMenuChange: () => void;
+  isPending: boolean;
 }
 
-export default function NavMenuDesktop({ routes, onMenuChange }: Props) {
+export default function NavMenuDesktop({
+  session,
+  routes,
+  onMenuChange,
+  isPending,
+}: Props) {
   return (
-    <nav className="flex w-full h-14 border justify-between items-center">
-      <ul className="hidden sm:flex gap-6 pl-10">
+    <nav className="flex h-14 w-full items-center justify-between border">
+      <ul className="hidden gap-6 pl-10 sm:flex">
         {routes.map((route) => (
           <li key={route.id}>
             <LinkButton type="link" href={route.href}>
@@ -25,15 +32,22 @@ export default function NavMenuDesktop({ routes, onMenuChange }: Props) {
           </li>
         ))}
       </ul>
-      <div className="hidden sm:flex gap-5 pr-10">
+      <div className="hidden gap-5 pr-10 sm:flex">
         <ModeToggle />
-        <SignupButton className="px-5">Signup</SignupButton>
-        <SigninButton className="px-5">Signin</SigninButton>
-        <SignoutButton className="px-5">Signout</SignoutButton>
+        {isPending ? (
+          <span>...</span>
+        ) : session ? (
+          <SignoutButton className="px-5">Signout</SignoutButton>
+        ) : (
+          <>
+            <SignupButton className="px-5">Signup</SignupButton>
+            <SigninButton className="px-5">Signin</SigninButton>
+          </>
+        )}
       </div>
       <Button
         variant={"outline"}
-        className="relative z-30 sm:hidden ml-5"
+        className="relative z-30 ml-5 sm:hidden"
         onClick={onMenuChange}
       >
         <Menu />

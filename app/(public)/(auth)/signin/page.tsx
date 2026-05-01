@@ -15,9 +15,9 @@ export default function SignIn() {
   >();
   return (
     <>
-      <h1 className="text-2xl font-bold text-center">Sign In</h1>
+      <h1 className="text-center text-2xl font-bold">Sign In</h1>
       <Button
-        className="flex gap-2 w-72 max-w-[80%]"
+        className="flex w-72 max-w-[80%] gap-2"
         variant={"default"}
         onClick={() => siginGitHUb(setError, setIsLoading)}
       >
@@ -28,7 +28,7 @@ export default function SignIn() {
         <Separator className="text-center">or</Separator>
       </div>
       <SigninForm />
-      {error && <p className="text-red-500 text-center">{error.statusText}</p>}
+      {error && <p className="text-center text-red-500">{error.statusText}</p>}
     </>
   );
 }

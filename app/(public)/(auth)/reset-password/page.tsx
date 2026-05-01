@@ -88,7 +88,7 @@ function ResetPasswordForm() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <p className="text-center text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-center text-sm">
             <Link href="/forgot-password" className="hover:underline">
               Solicitar otro enlace
             </Link>
@@ -123,7 +123,7 @@ function ResetPasswordForm() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <p className="text-center text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-center text-sm">
             Redirigiendo a iniciar sesión...
           </p>
         </CardContent>
@@ -154,7 +154,7 @@ function ResetPasswordForm() {
               className="mt-1"
             />
             {validationErrors?.password && (
-              <p className="text-destructive text-xs mt-1">
+              <p className="text-destructive mt-1 text-xs">
                 {validationErrors.password[0]}
               </p>
             )}
@@ -170,7 +170,7 @@ function ResetPasswordForm() {
               className="mt-1"
             />
             {validationErrors?.confirmPassword && (
-              <p className="text-destructive text-xs mt-1">
+              <p className="text-destructive mt-1 text-xs">
                 {validationErrors.confirmPassword[0]}
               </p>
             )}
@@ -181,7 +181,7 @@ function ResetPasswordForm() {
           </Button>
 
           {dbError && (
-            <p className="text-destructive text-sm text-center">{dbError}</p>
+            <p className="text-destructive text-center text-sm">{dbError}</p>
           )}
         </form>
       </CardContent>

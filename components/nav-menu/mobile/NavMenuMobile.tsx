@@ -6,11 +6,14 @@ import LinkButton from "@/components/ui/link-button";
 import { Separator } from "@/components/ui/separator";
 import { ModeToggle } from "@/components/theme-botton";
 import { Dispatch, SetStateAction, useEffect } from "react";
+import { Session } from "../NavMenu";
 
 export default function NavMenuMobile({
   routes,
   isMenuOpen,
   onChangeMenu,
+  session,
+  isPending,
 }: {
   routes: {
     name: string;
@@ -19,6 +22,8 @@ export default function NavMenuMobile({
   }[];
   isMenuOpen: boolean;
   onChangeMenu: Dispatch<SetStateAction<boolean>>;
+  session: Session | null;
+  isPending: boolean;
 }) {
   const closeMenu = () => {
     onChangeMenu(false);
@@ -42,12 +47,12 @@ export default function NavMenuMobile({
   if (!isMenuOpen) return null;
   return (
     <div
-      className="fixed top-0 z-20 w-full h-full overlay backdrop-blur-md sm:hidden"
+      className="overlay fixed top-0 z-20 h-full w-full backdrop-blur-md sm:hidden"
       onClick={closeMenu}
     >
       <aside
         onClick={stopPropagation}
-        className={`flex flex-col z-50 gap-5 absolute top-0 left-0 w-72 max-w-[70%] backdrop-blur-3xl border h-full  sm:hidden px-5 pt-20 transition-all duration-150}`}
+        className={`duration-150} absolute top-0 left-0 z-50 flex h-full w-72 max-w-[70%] flex-col gap-5 border px-5 pt-20 backdrop-blur-3xl transition-all sm:hidden`}
       >
         <ul className="space-y-3">
           {routes.map((route, index) => (
@@ -60,9 +65,16 @@ export default function NavMenuMobile({
         </ul>
         <Separator />
         <div className="flex flex-col gap-5" onClick={closeMenu}>
-          <SignupButton className="text-center">Signup</SignupButton>
-          <SigninButton className="text-center">Signin</SigninButton>
-          <SignoutButton className="text-center">Signout</SignoutButton>
+          {isPending ? (
+            <span>...</span>
+          ) : session ? (
+            <SignoutButton className="px-5">Signout</SignoutButton>
+          ) : (
+            <>
+              <SignupButton className="px-5">Signup</SignupButton>
+              <SigninButton className="px-5">Signin</SigninButton>
+            </>
+          )}
         </div>
         <ModeToggle />
       </aside>

@@ -20,7 +20,7 @@ export default function SignupForm() {
   );
   return (
     <form
-      className="w-full max-w-md p-8 rounded-lg shadow-md space-y-4"
+      className="w-full max-w-md space-y-4 rounded-lg p-8 shadow-md"
       action={formAction}
     >
       <CustomInput
@@ -57,12 +57,12 @@ export default function SignupForm() {
 
       <button
         disabled={pending}
-        className="w-full bg-blue-600  py-2 px-4 rounded-md hover:bg-blue-700 disabled:opacity-50"
+        className="w-full rounded-md bg-blue-600 px-4 py-2 hover:bg-blue-700 disabled:opacity-50"
       >
         {pending ? "Creating account..." : "Sign Up"}
       </button>
       {formState.dbErrors && (
-        <p className="text-red-500 text-sm">{formState.dbErrors.message}</p>
+        <p className="text-sm text-red-500">{formState.dbErrors.message}</p>
       )}
     </form>
   );

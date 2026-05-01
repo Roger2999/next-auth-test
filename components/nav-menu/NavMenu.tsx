@@ -2,7 +2,7 @@
 import { useState } from "react";
 import NavMenuDesktop from "./desktop/NavMenuDesktop";
 import NavMenuMobile from "./mobile/NavMenuMobile";
-// import { useRouter } from "next/router";
+
 export type Route = {
   name: string;
   href: string;
@@ -10,7 +10,6 @@ export type Route = {
   id: string;
 };
 export default function NavMenu() {
-  // const router = useRouter();
   const routes = [
     { name: "Home", href: "/", current: false, id: "1" },
     { name: "Contact", href: "/contact", current: false, id: "2" },

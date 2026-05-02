@@ -5,22 +5,18 @@ import SigninButton from "@/app/(public)/(auth)/components/signin-button";
 import SignupButton from "@/app/(public)/(auth)/components/signup-button";
 import LinkButton from "@/components/ui/link-button";
 import { ModeToggle } from "@/components/theme-botton";
-
-import { Route, Session } from "../NavMenu";
+import type { Route } from "../NavMenu";
+import HamburgerButton from "@/components/hamburger-button";
+import { auth } from "@/app/lib/auth";
+import { headers } from "next/headers";
 
 interface Props {
-  session: Session | null;
   routes: Route[];
-  onMenuChange: () => void;
-  isPending: boolean;
 }
 
-export default function NavMenuDesktop({
-  session,
-  routes,
-  onMenuChange,
-  isPending,
-}: Props) {
+export default async function NavMenuDesktop({ routes }: Props) {
+  const session = await auth.api.getSession({ headers: await headers() });
+
   return (
     <nav className="flex h-14 w-full items-center justify-between border">
       <ul className="hidden gap-6 pl-10 sm:flex">
@@ -34,24 +30,17 @@ export default function NavMenuDesktop({
       </ul>
       <div className="hidden gap-5 pr-10 sm:flex">
         <ModeToggle />
-        {isPending ? (
-          <span>...</span>
-        ) : session ? (
-          <SignoutButton className="px-5">Signout</SignoutButton>
-        ) : (
-          <>
-            <SignupButton className="px-5">Signup</SignupButton>
-            <SigninButton className="px-5">Signin</SigninButton>
-          </>
-        )}
+
+        <SignoutButton className="px-5" session={session} />
+
+        <SignupButton className="px-5" session={session}>
+          Signup
+        </SignupButton>
+        <SigninButton className="px-5" session={session}>
+          Signin
+        </SigninButton>
       </div>
-      <Button
-        variant={"outline"}
-        className="relative z-30 ml-5 sm:hidden"
-        onClick={onMenuChange}
-      >
-        <Menu />
-      </Button>
+      <HamburgerButton />
     </nav>
   );
 }

@@ -5,28 +5,23 @@ import SignupButton from "@/app/(public)/(auth)/components/signup-button";
 import LinkButton from "@/components/ui/link-button";
 import { Separator } from "@/components/ui/separator";
 import { ModeToggle } from "@/components/theme-botton";
-import { Dispatch, SetStateAction, useEffect } from "react";
-import { Session } from "../NavMenu";
+import { useEffect } from "react";
+import { useNavMenuStore } from "@/stores/useNavMenuStore";
 
-export default function NavMenuMobile({
-  routes,
-  isMenuOpen,
-  onChangeMenu,
-  session,
-  isPending,
-}: {
+interface Props {
   routes: {
     name: string;
     href: string;
     current: boolean;
   }[];
-  isMenuOpen: boolean;
-  onChangeMenu: Dispatch<SetStateAction<boolean>>;
-  session: Session | null;
-  isPending: boolean;
-}) {
+  session: unknown;
+}
+
+export default function NavMenuMobile({ routes, session }: Props) {
+  const { isMenuOpen, setIsMenuOpen } = useNavMenuStore();
+
   const closeMenu = () => {
-    onChangeMenu(false);
+    setIsMenuOpen(false);
   };
   const stopPropagation = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -43,7 +38,7 @@ export default function NavMenuMobile({
     return () => {
       document.removeEventListener("keydown", handleEsc);
     };
-  }, [isMenuOpen, onChangeMenu]);
+  }, [isMenuOpen, setIsMenuOpen]);
   if (!isMenuOpen) return null;
   return (
     <div
@@ -65,16 +60,13 @@ export default function NavMenuMobile({
         </ul>
         <Separator />
         <div className="flex flex-col gap-5" onClick={closeMenu}>
-          {isPending ? (
-            <span>...</span>
-          ) : session ? (
-            <SignoutButton className="px-5">Signout</SignoutButton>
-          ) : (
-            <>
-              <SignupButton className="px-5">Signup</SignupButton>
-              <SigninButton className="px-5">Signin</SigninButton>
-            </>
-          )}
+          <SignoutButton className="px-5" session={session} />
+          <SignupButton className="px-5" session={session}>
+            Signup
+          </SignupButton>
+          <SigninButton className="px-5" session={session}>
+            Signin
+          </SigninButton>
         </div>
         <ModeToggle />
       </aside>

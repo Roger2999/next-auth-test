@@ -3,23 +3,22 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ReactNode } from "react";
 
-export default function SignupButton({
-  children,
-  className,
-}: {
+interface Props {
   children: ReactNode;
   className?: string;
-}) {
+  session: unknown;
+}
+
+export default function SignupButton({ children, className, session }: Props) {
   const baseStyles = "bg-white/20 border rounded-md p-1 border-black/20";
+  if (session) return null;
 
   return (
-    <>
-      <Link
-        href={"/signup"}
-        className={cn(`bg-background ${baseStyles}`, className)}
-      >
-        {children ? children : "label"}
-      </Link>
-    </>
+    <Link
+      href={"/signup"}
+      className={cn(`bg-background ${baseStyles}`, className)}
+    >
+      {children ? children : "label"}
+    </Link>
   );
 }

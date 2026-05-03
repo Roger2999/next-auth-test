@@ -144,7 +144,6 @@ export async function signinWithCredentials(
       validationErrors: null,
     };
   }
-  revalidatePath("/", "page");
   redirect("/dashboard");
 }
 export async function signout(prevState: SignoutState): Promise<SignoutState> {
@@ -172,7 +171,6 @@ export async function signout(prevState: SignoutState): Promise<SignoutState> {
       },
     };
   }
-  revalidatePath("/", "page");
   redirect("/signin");
 }
 export async function sendVerificationEmail(

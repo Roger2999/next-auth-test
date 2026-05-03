@@ -3,18 +3,20 @@ import { auth } from "@/app/lib/auth";
 import prisma from "@/lib/prisma";
 import {
   SendEmailFormSchema,
-  SendEmailState,
   SigninFormSchema,
-  SigninFormState,
-  SignoutState,
   SignupFormSchema,
-  SignupFormState,
 } from "@/lib/zod";
 import { APIError } from "better-auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import z from "zod";
+import {
+  SendEmailState,
+  SigninFormState,
+  SignoutState,
+  SignupFormState,
+} from "@/lib/types";
 
 export async function signupWithCredentials(
   prevState: SignupFormState,

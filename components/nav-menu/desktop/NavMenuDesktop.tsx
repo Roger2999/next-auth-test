@@ -3,11 +3,11 @@ import SignoutButton from "@/app/(public)/(auth)/components/signout-button";
 import SigninButton from "@/app/(public)/(auth)/components/signin-button";
 import SignupButton from "@/app/(public)/(auth)/components/signup-button";
 import LinkButton from "@/components/ui/link-button";
-import { ModeToggle } from "@/components/theme-botton";
+import { ModeToggle } from "@/components/ui/theme-botton";
 
-import HamburgerButton from "@/components/hamburger-button";
+import HamburgerButton from "@/components/ui/hamburger-button";
 
-import { getSession } from "@/lib/getSession";
+import { getSession } from "@/lib/helpers";
 import { routes } from "@/lib/constants";
 
 export default async function NavMenuDesktop() {

@@ -1,4 +1,4 @@
-import HomeCard from "@/components/home-card";
+import HomeCard from "@/components/ui/home-card";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRightIcon } from "lucide-react";
 export default function Home() {

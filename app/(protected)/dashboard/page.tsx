@@ -1,7 +1,6 @@
 import { auth } from "@/app/lib/auth";
 
 import { headers } from "next/headers";
-import Image from "next/image";
 
 import { redirect } from "next/navigation";
 
@@ -16,18 +15,8 @@ export default async function Dashboard() {
 
   return (
     <div className="text-2xl">
-      <h2>Welcome {session.user.name}</h2>
-      {session && session.user.image && (
-        <div className="relative h-32 w-32 overflow-hidden rounded-full border-4 border-white shadow-md">
-          <Image
-            src={session?.user?.image}
-            alt="alt"
-            fill
-            priority
-            className="object-cover"
-          />
-        </div>
-      )}
+      <h2>Welcome to dashboard {session.user.name}</h2>
+      <h3>Your ip address is {}</h3>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { SubmitEvent, Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { authClient } from "@/app/lib/auth-client";
 import { KeyRound } from "lucide-react";
@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { ResetPasswordSchema } from "@/lib/zod";
+import z from "zod";
 
 function ResetPasswordForm() {
   const router = useRouter();
@@ -33,7 +34,7 @@ function ResetPasswordForm() {
   const [pending, setPending] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setDbError(null);
 
@@ -42,12 +43,7 @@ function ResetPasswordForm() {
       confirmPassword,
     });
     if (!validate.success) {
-      setValidationErrors(
-        validate.error.flatten().fieldErrors as {
-          password?: string[];
-          confirmPassword?: string[];
-        },
-      );
+      setValidationErrors(z.flattenError(validate.error).fieldErrors);
       return;
     }
 

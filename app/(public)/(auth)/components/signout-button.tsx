@@ -5,14 +5,11 @@ import { signout } from "../actions/auth-actions";
 
 interface Props {
   className?: string;
-  session: unknown;
 }
 
-export default function SignoutButton({ className, session }: Props) {
+export default function SignoutButton({ className }: Props) {
   const [state, action, pending] = useActionState(signout, {});
   const baseStyles = "border bg-white/20 rounded-md p-1 border-black/20";
-
-  if (!session) return null;
 
   return (
     <form action={action}>

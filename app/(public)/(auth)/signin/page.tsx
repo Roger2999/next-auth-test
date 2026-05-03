@@ -13,6 +13,7 @@ export default function SignIn() {
   const [error, setError] = useState<
     BetterFetchError & Record<string, unknown>
   >();
+
   return (
     <>
       <h1 className="text-center text-2xl font-bold">Sign In</h1>

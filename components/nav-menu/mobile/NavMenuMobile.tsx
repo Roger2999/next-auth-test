@@ -7,17 +7,31 @@ import { Separator } from "@/components/ui/separator";
 import { ModeToggle } from "@/components/theme-botton";
 import { useEffect } from "react";
 import { useNavMenuStore } from "@/stores/useNavMenuStore";
-
+import { routes } from "@/lib/constants";
 interface Props {
-  routes: {
-    name: string;
-    href: string;
-    current: boolean;
-  }[];
-  session: unknown;
+  session: {
+    session: {
+      id: string;
+      createdAt: Date;
+      updatedAt: Date;
+      userId: string;
+      expiresAt: Date;
+      token: string;
+      ipAddress?: string | null | undefined;
+      userAgent?: string | null | undefined;
+    };
+    user: {
+      id: string;
+      createdAt: Date;
+      updatedAt: Date;
+      email: string;
+      emailVerified: boolean;
+      name: string;
+      image?: string | null | undefined;
+    };
+  } | null;
 }
-
-export default function NavMenuMobile({ routes, session }: Props) {
+export default function NavMenuMobile({ session }: Props) {
   const { isMenuOpen, setIsMenuOpen } = useNavMenuStore();
 
   const closeMenu = () => {
@@ -60,13 +74,14 @@ export default function NavMenuMobile({ routes, session }: Props) {
         </ul>
         <Separator />
         <div className="flex flex-col gap-5" onClick={closeMenu}>
-          <SignoutButton className="px-5" session={session} />
-          <SignupButton className="px-5" session={session}>
-            Signup
-          </SignupButton>
-          <SigninButton className="px-5" session={session}>
-            Signin
-          </SigninButton>
+          {session ? (
+            <SignoutButton className="px-5" />
+          ) : (
+            <>
+              <SignupButton className="px-5">Signup</SignupButton>
+              <SigninButton className="px-5">Signin</SigninButton>
+            </>
+          )}
         </div>
         <ModeToggle />
       </aside>

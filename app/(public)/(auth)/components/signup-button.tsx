@@ -6,12 +6,10 @@ import { ReactNode } from "react";
 interface Props {
   children: ReactNode;
   className?: string;
-  session: unknown;
 }
 
-export default function SignupButton({ children, className, session }: Props) {
+export default function SignupButton({ children, className }: Props) {
   const baseStyles = "bg-white/20 border rounded-md p-1 border-black/20";
-  if (session) return null;
 
   return (
     <Link

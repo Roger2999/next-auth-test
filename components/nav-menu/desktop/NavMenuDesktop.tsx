@@ -36,7 +36,7 @@ export default async function NavMenuDesktop() {
         )}
         {session?.user.image && (
                   <div className="flex w-full items-center justify-center">
-                    <div className="relative h-full w-full overflow-hidden rounded-full">
+                    <div className="relative h-10 w-10 overflow-hidden rounded-full">
                       <Image
                         src={session && session?.user?.image}
                         priority

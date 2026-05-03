@@ -3,8 +3,9 @@
 import { auth } from "@/app/lib/auth";
 import { headers } from "next/headers";
 import { APIError } from "better-auth";
-import { ForgotPasswordSchema, SendEmailState } from "@/lib/zod";
+import { ForgotPasswordSchema } from "@/lib/zod";
 import { z } from "zod";
+import { SendEmailState } from "@/lib/types";
 
 export async function requestPasswordReset(
   prevState: SendEmailState,

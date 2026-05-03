@@ -1,6 +1,6 @@
 "use client";
 
-import { ForgotPasswordState } from "@/lib/zod";
+
 import FieldError from "../components/field-error";
 import { useActionState } from "react";
 
@@ -16,6 +16,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
+import { ForgotPasswordState } from "@/lib/types";
 
 const INITIAL_STATE: ForgotPasswordState = {
   success: false,

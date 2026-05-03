@@ -2,9 +2,10 @@
 import { useActionState } from "react";
 import CustomInput from "./custom-input";
 import SignupFormError from "./field-error";
-import { SignupFormState } from "@/lib/zod";
+
 import { signupWithCredentials } from "../actions/auth-actions";
 import ImageUploadButton from "./upload-button";
+import { SignupFormState } from "@/lib/types";
 
 export default function SignupForm() {
   const INITIAL_STATE: SignupFormState = {

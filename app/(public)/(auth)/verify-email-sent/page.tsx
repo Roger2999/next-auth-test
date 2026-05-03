@@ -1,6 +1,5 @@
 "use client";
 
-import { SendEmailState } from "@/lib/zod";
 import FieldError from "../components/field-error";
 import { useActionState } from "react";
 
@@ -15,6 +14,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { SendEmailState } from "@/lib/types";
 
 const INITIAL_STATE: SendEmailState = {
   success: false,

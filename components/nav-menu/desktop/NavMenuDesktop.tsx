@@ -9,6 +9,7 @@ import HamburgerButton from "@/components/ui/hamburger-button";
 
 import { getSession } from "@/lib/helpers";
 import { routes } from "@/lib/constants";
+import Image from "next/image";
 
 export default async function NavMenuDesktop() {
   const session = await getSession();
@@ -33,6 +34,19 @@ export default async function NavMenuDesktop() {
             <SigninButton className="px-5">Signin</SigninButton>
           </>
         )}
+        {session?.user.image && (
+                  <div className="flex w-full items-center justify-center">
+                    <div className="relative h-20 w-20 overflow-hidden rounded-full">
+                      <Image
+                        src={session && session?.user?.image}
+                        priority
+                        fill
+                        alt={`profile-photo-${session?.user.name}`}
+                        className="object-cover object-center"
+                      />
+                    </div>
+                  </div>
+                )}
       </div>
       <HamburgerButton />
     </nav>

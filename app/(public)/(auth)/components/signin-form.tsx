@@ -1,11 +1,12 @@
 "use client";
-import { SigninFormState } from "@/lib/zod";
+
 import SignupFormError from "./field-error";
 import { useActionState } from "react";
 
 import CustomInput from "./custom-input";
 import { signinWithCredentials } from "../actions/auth-actions";
 import Link from "next/link";
+import { SigninFormState } from "@/lib/types";
 
 const INITIAL_STATE: SigninFormState = {
   data: undefined,

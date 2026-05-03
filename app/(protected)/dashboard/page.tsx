@@ -16,7 +16,7 @@ export default async function Dashboard() {
   return (
     <div className="text-2xl">
       <h2>Welcome to dashboard {session.user.name}</h2>
-      <h3>Your ip address is {}</h3>
+      <h3>Your ip address is {session?.session?.ipaddress}</h3>
     </div>
   );
 }

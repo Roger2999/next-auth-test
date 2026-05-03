@@ -93,7 +93,7 @@ export default function NavMenuMobile({ session }: Props) {
 
         <Separator />
         {/* buttons */}
-        <div className="flex flex-col gap-5" onClick={closeMenu}>
+        <div className="flex flex-col gap-5">
           {session ? (
             <SignoutButton className="w-full px-5" />
           ) : (

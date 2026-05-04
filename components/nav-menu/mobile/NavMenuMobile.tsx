@@ -95,11 +95,15 @@ export default function NavMenuMobile({ session }: Props) {
         {/* buttons */}
         <div className="flex flex-col gap-5">
           {session ? (
-            <SignoutButton className="w-full px-5" />
+            <SignoutButton className="w-full px-5" onClick={closeMenu} />
           ) : (
             <>
-              <SignupButton className="w-full px-5">Signup</SignupButton>
-              <SigninButton className="w-full px-5">Signin</SigninButton>
+              <SignupButton className="w-full px-5" onClick={closeMenu}>
+                Signup
+              </SignupButton>
+              <SigninButton className="w-full px-5" onClick={closeMenu}>
+                Signin
+              </SigninButton>
             </>
           )}
         </div>

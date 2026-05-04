@@ -1,5 +1,5 @@
 import HomeCard from "@/components/ui/home-card";
-import { ArrowRightIcon, LockIcon, UserIcon, MailIcon } from "lucide-react";
+import { ArrowRightIcon, LockIcon, UserIcon } from "lucide-react";
 
 const stack = ["Better auth", "Prisma", "Resend"];
 

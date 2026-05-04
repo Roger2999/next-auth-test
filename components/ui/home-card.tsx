@@ -6,7 +6,7 @@ interface Props {
 export default function HomeCard({ title = "Título", items = [] }: Props) {
   return (
     <div className="border-border/50 space-y-5 rounded-md border p-4 shadow-2xl sm:px-10">
-      <h2>{title}:</h2>
+      <h2 className="font-semibold">{title}:</h2>
       <ul className="grid grid-cols-2 gap-5 sm:grid-cols-3">
         {items.map((item) => (
           <li

@@ -14,7 +14,7 @@ export default function SignoutButton({ className, onClick }: Props) {
 
   return (
     <form action={action}>
-      <button className={cn(baseStyles, className)} onClick={onClick}>
+      <button className={cn(baseStyles, className)}>
         {pending ? "Loading..." : "Signout"}
       </button>
       {state.errors && <p>{state.errors.message}</p>}

@@ -57,12 +57,12 @@ export default function NavMenuMobile({ session }: Props) {
   if (!isMenuOpen) return null;
   return (
     <div
-      className="overlay fixed top-0 z-20 h-full w-full backdrop-blur-3xl sm:hidden"
+      className="overlay fixed top-0 z-20 h-full w-full backdrop-blur-xs sm:hidden"
       onClick={closeMenu}
     >
       <aside
         onClick={stopPropagation}
-        className={`absolute top-0 left-0 z-50 flex h-full w-72 max-w-[70%] flex-col gap-5 border bg-white/20 px-5 pt-20 transition-all duration-150 sm:hidden`}
+        className={`bg-sidebar absolute top-0 left-0 z-50 flex h-full w-72 max-w-[70%] flex-col gap-5 border px-5 pt-20 transition-all duration-150 sm:hidden`}
       >
         {/* image */}
         {session?.user.image && (

@@ -14,23 +14,33 @@ import Image from "next/image";
 export default async function NavMenuDesktop() {
   const session = await getSession();
   return (
-    <nav className="flex h-14 w-full items-center justify-between border-b py-2">
+    <nav className="border-b-border/90 bg-menu flex h-16 w-full items-center justify-between border-b">
       <ul className="hidden gap-6 pl-10 sm:flex">
-        {routes.map(
-          (route: {
-            name: string;
-            href: string;
-            current: boolean;
-            id: string;
-          }) => (
-            <li key={route.id}>
-              <LinkButton type="link" href={route.href}>
-                {route.name}
-              </LinkButton>
-            </li>
-          ),
+        {!session ? (
+          routes.map(
+            (route: {
+              name: string;
+              href: string;
+              current: boolean;
+              id: string;
+            }) => (
+              <li key={route.id}>
+                <LinkButton type="link" href={route.href}>
+                  {route.name}
+                </LinkButton>
+              </li>
+            ),
+          )
+        ) : (
+          <h1 className="text-xl">
+            <strong className="text-accent-foreground font-semibold">
+              {session.user.name}
+            </strong>{" "}
+            Dashboard
+          </h1>
         )}
       </ul>
+
       <div className="hidden h-full items-center justify-center gap-5 pr-10 sm:flex">
         <ModeToggle />
         {session ? (

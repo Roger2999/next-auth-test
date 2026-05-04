@@ -14,17 +14,24 @@ import Image from "next/image";
 export default async function NavMenuDesktop() {
   const session = await getSession();
   return (
-    <nav className="flex h-14 w-full items-center justify-between border">
+    <nav className="flex h-14 w-full items-center justify-between border-b py-2">
       <ul className="hidden gap-6 pl-10 sm:flex">
-        {routes.map((route) => (
-          <li key={route.id}>
-            <LinkButton type="link" href={route.href}>
-              {route.name}
-            </LinkButton>
-          </li>
-        ))}
+        {routes.map(
+          (route: {
+            name: string;
+            href: string;
+            current: boolean;
+            id: string;
+          }) => (
+            <li key={route.id}>
+              <LinkButton type="link" href={route.href}>
+                {route.name}
+              </LinkButton>
+            </li>
+          ),
+        )}
       </ul>
-      <div className="hidden gap-5 pr-10 sm:flex">
+      <div className="hidden h-full items-center justify-center gap-5 pr-10 sm:flex">
         <ModeToggle />
         {session ? (
           <SignoutButton className="px-5" />
@@ -35,16 +42,14 @@ export default async function NavMenuDesktop() {
           </>
         )}
         {session?.user.image && (
-          <div className="flex w-full items-center justify-center">
-            <div className="relative h-20 w-20 overflow-hidden rounded-full">
-              <Image
-                src={session && session?.user?.image}
-                priority
-                fill
-                alt={`profile-photo-${session?.user.name}`}
-                className="object-cover object-center"
-              />
-            </div>
+          <div className="relative h-14 w-14 overflow-hidden rounded-full">
+            <Image
+              src={session && session?.user?.image}
+              priority
+              fill
+              alt={`profile-photo-${session?.user.name}`}
+              className="object-cover object-center"
+            />
           </div>
         )}
       </div>

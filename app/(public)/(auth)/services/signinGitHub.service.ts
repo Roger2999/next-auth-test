@@ -23,9 +23,6 @@ export const siginGitHUb = async (
             onErrorChange(undefined);
           }, 6000);
         },
-        onRequest: () => {
-          onLoadingChange(true);
-        },
       },
     );
   } catch (error) {

@@ -4,7 +4,7 @@ import { authClient } from "@/app/lib/auth-client";
 import { BetterFetchError } from "better-auth/react";
 import { Dispatch, SetStateAction } from "react";
 
-export const signInGitHUb = async (
+export const signInGitHub = async (
   onErrorChange: Dispatch<
     SetStateAction<(BetterFetchError & Record<string, unknown>) | undefined>
   >,

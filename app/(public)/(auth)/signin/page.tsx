@@ -5,7 +5,7 @@ import { FolderGit2 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import { BetterFetchError } from "better-auth/react";
-import { signinGitHUb } from "../services/signinGitHub.service";
+import { signInGitHUb } from "../services/signinGitHub.service";
 import SigninForm from "../components/signin-form";
 
 export default function SignIn() {
@@ -20,7 +20,7 @@ export default function SignIn() {
       <Button
         className="flex w-72 max-w-[80%] gap-2"
         variant={"default"}
-        onClick={() => signinGitHUb(setError, setIsLoading)}
+        onClick={() => signInGitHUb(setError, setIsLoading)}
       >
         {isLoading ? "Loading..." : "Sign in with GitHub"}
         <FolderGit2 />

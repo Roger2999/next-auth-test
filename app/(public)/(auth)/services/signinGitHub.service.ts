@@ -28,6 +28,9 @@ export const siginGitHUb = async (
         },
       },
     );
+  } catch (error) {
+    console.error("GitHub sign-in error:", error);
+    onErrorChange(error as BetterFetchError & Record<string, unknown>);
   } finally {
     onLoadingChange(false);
   }

@@ -9,7 +9,6 @@ import {
 import { APIError } from "better-auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
 import z from "zod";
 import {
   SendEmailState,

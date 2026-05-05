@@ -28,7 +28,7 @@ const features = [
 
 export default function Home() {
   return (
-    <div className="from-background to-background/80 flex min-h-screen w-full flex-col items-center gap-10 bg-linear-to-b px-4 py-16">
+    <div className="from-background to-background/80 flex w-full flex-col items-center gap-10 bg-linear-to-b px-4 py-16">
       <section className="flex max-w-2xl flex-col items-center gap-6 text-center">
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
           Sistema de Autenticación

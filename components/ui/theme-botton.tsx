@@ -21,18 +21,16 @@ export function ModeToggle() {
 
   return (
     <DropdownMenu onOpenChange={handleMenu}>
-      <DropdownMenuTrigger>
-        <Button className="w-fit space-x-3" variant="outline">
-          {theme === "light" ? (
-            <Sun className="h-[1.2rem] w-[1.2rem]" />
-          ) : (
-            <Moon className="h-[1.2rem] w-[1.2rem]" />
-          )}
+      <DropdownMenuTrigger className="border-btn/50 flex w-fit items-center justify-center gap-3 rounded-2xl border px-4 py-1">
+        {theme === "light" ? (
+          <Sun className="h-[1.2rem] w-[1.2rem]" />
+        ) : (
+          <Moon className="h-[1.2rem] w-[1.2rem]" />
+        )}
 
-          {isOpen ? <ArrowBigUpDash /> : <ArrowBigDownDash />}
+        {isOpen ? <ArrowBigUpDash /> : <ArrowBigDownDash />}
 
-          <span className="sr-only">Toggle theme</span>
-        </Button>
+        <span className="sr-only">Toggle theme</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-fit" sideOffset={8} align="center">
         <DropdownMenuItem onClick={() => setTheme("light")}>

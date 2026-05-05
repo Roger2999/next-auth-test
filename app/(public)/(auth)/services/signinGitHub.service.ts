@@ -1,28 +1,32 @@
 "use client";
 
 import { authClient } from "@/app/lib/auth-client";
-import { BetterFetchError } from "better-auth/react";
 import { Dispatch, SetStateAction } from "react";
 
-export const siginGitHUb = async (
-  onErrorChange: Dispatch<
-    SetStateAction<(BetterFetchError & Record<string, unknown>) | undefined>
-  >,
+export const signInGitHub = (
+  onErrorChange: Dispatch<SetStateAction<string | null>>,
   onLoadingChange: Dispatch<SetStateAction<boolean>>,
 ) => {
-    await authClient.signIn.social(
-      {
-        provider: "github",
-        callbackURL: "/dashboard",
+  onLoadingChange(true);
+
+  return authClient.signIn.social(
+    {
+      provider: "github",
+      callbackURL: "/dashboard",
+    },
+    {
+      onRequest: () => {
+        onLoadingChange(true);
       },
-      {
-        onError: (ctx) => {
-          onErrorChange(ctx.error);
-          setTimeout(() => {
-            onErrorChange(undefined);
-          }, 6000);
-        },
+      onError: (ctx) => {
+        console.error("Better Auth error:", ctx.error);
+        onErrorChange(ctx.error.message ?? "Unknown error");
+        onLoadingChange(false);
+
+        setTimeout(() => {
+          onErrorChange(null);
+        }, 6000);
       },
-    );
-  }
+    },
+  );
 };

@@ -10,7 +10,6 @@ export const siginGitHUb = async (
   >,
   onLoadingChange: Dispatch<SetStateAction<boolean>>,
 ) => {
-  try {
     await authClient.signIn.social(
       {
         provider: "github",
@@ -25,8 +24,5 @@ export const siginGitHUb = async (
         },
       },
     );
-  } catch (error) {
-    console.error("GitHub sign-in error:", error);
-    onErrorChange(error as BetterFetchError & Record<string, unknown>);
   }
 };

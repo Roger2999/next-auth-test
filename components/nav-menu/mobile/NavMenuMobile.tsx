@@ -64,17 +64,20 @@ export default function NavMenuMobile({ session }: Props) {
         className={`bg-sidebar absolute top-0 left-0 z-50 flex h-full w-72 max-w-[70%] flex-col gap-5 border px-5 pt-20 transition-all duration-150 sm:hidden`}
       >
         {/* image */}
-        <div className="flex w-full items-center justify-center">
-          <div className="relative h-20 w-20 overflow-hidden rounded-full">
-            <Image
-              src={session?.user?.image || "/assets/user-default-100.png"}
-              priority
-              fill
-              alt={`profile-photo-${session?.user.name}`}
-              className="object-cover object-center"
-            />
+        {session && (
+          <div className="flex w-full items-center justify-center">
+            <div className="relative h-20 w-20 overflow-hidden rounded-full">
+              <Image
+                src={session?.user?.image || "/assets/user-default-100.png"}
+                priority
+                fill
+                alt={`profile-photo-${session?.user.name}`}
+                className="object-cover object-center"
+              />
+            </div>
           </div>
-        </div>
+        )}
+
         {/* links */}
         {!session && (
           <ul className="space-y-3">

@@ -53,15 +53,17 @@ export default async function NavMenuDesktop() {
             </SignButton>
           </>
         )}
-        <div className="relative h-14 w-14 overflow-hidden rounded-full">
-          <Image
-            src={session?.user?.image || "/assets/user-default-100.png"}
-            priority
-            fill
-            alt={`profile-photo-${session?.user.name}`}
-            className="object-cover object-center"
-          />
-        </div>
+        {session && (
+          <div className="relative h-14 w-14 overflow-hidden rounded-full">
+            <Image
+              src={session.user?.image || "/assets/user-default-100.png"}
+              priority
+              fill
+              alt={`profile-photo-${session.user.name}`}
+              className="object-cover object-center"
+            />
+          </div>
+        )}
       </div>
       <HamburgerButton />
     </nav>

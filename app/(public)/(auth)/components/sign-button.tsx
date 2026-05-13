@@ -3,21 +3,21 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ReactNode } from "react";
 
-interface Props {
+interface Props extends React.ComponentProps<"a"> {
   children: ReactNode;
-  className?: string;
-  onClick?: () => void;
+  href: string;
 }
 
-export default function SignupButton({ children, className, onClick }: Props) {
+export default function SignButton({
+  children,
+  className,
+  href,
+  ...props
+}: Props) {
   const baseStyles = "bg-white/20 border rounded-md p-1 border-black/20";
 
   return (
-    <Link
-      href={"/signup"}
-      className={cn(`bg-background ${baseStyles}`, className)}
-      onClick={onClick}
-    >
+    <Link {...props} href={href} className={cn(baseStyles, className)}>
       {children ? children : "label"}
     </Link>
   );

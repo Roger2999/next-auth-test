@@ -1,14 +1,13 @@
 "use client";
-import SigninButton from "@/app/(public)/(auth)/components/signin-button";
 import SignoutButton from "@/app/(public)/(auth)/components/signout-button";
-import SignupButton from "@/app/(public)/(auth)/components/signup-button";
 import LinkButton from "@/components/ui/link-button";
 import { Separator } from "@/components/ui/separator";
 import { ModeToggle } from "@/components/ui/theme-botton";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useNavMenuStore } from "@/stores/useNavMenuStore";
 import { routes } from "@/lib/constants";
 import Image from "next/image";
+import SignButton from "@/app/(public)/(auth)/components/sign-button";
 interface Props {
   session: {
     session: {
@@ -35,9 +34,9 @@ interface Props {
 export default function NavMenuMobile({ session }: Props) {
   const { isMenuOpen, setIsMenuOpen } = useNavMenuStore();
 
-  const closeMenu = () => {
+  const closeMenu = useCallback(() => {
     setIsMenuOpen(false);
-  };
+  },[setIsMenuOpen]);
   const stopPropagation = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
@@ -53,7 +52,7 @@ export default function NavMenuMobile({ session }: Props) {
     return () => {
       document.removeEventListener("keydown", handleEsc);
     };
-  }, [isMenuOpen, setIsMenuOpen]);
+  }, [closeMenu, isMenuOpen, setIsMenuOpen]);
   if (!isMenuOpen) return null;
   return (
     <div
@@ -98,12 +97,12 @@ export default function NavMenuMobile({ session }: Props) {
             <SignoutButton className="w-full px-5" onClick={closeMenu} />
           ) : (
             <>
-              <SignupButton className="w-full px-5" onClick={closeMenu}>
+              <SignButton href="/signup" className="w-full px-5" onClick={closeMenu}>
                 Signup
-              </SignupButton>
-              <SigninButton className="w-full px-5" onClick={closeMenu}>
+              </SignButton>
+              <SignButton href="signin" className="w-full px-5" onClick={closeMenu}>
                 Signin
-              </SigninButton>
+              </SignButton>
             </>
           )}
         </div>

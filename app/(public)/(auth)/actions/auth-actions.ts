@@ -43,7 +43,7 @@ export async function signupWithCredentials(
   }
   const { username, email, password, image } = validateFields.data;
 
-  const profilePhoto = image ? image : "https://via.placeholder.com/300x200";
+  const profilePhoto = image ? image : "/assets/user-default-100.png";
 
   const existingUser = await prisma.user.findFirst({
     where: {

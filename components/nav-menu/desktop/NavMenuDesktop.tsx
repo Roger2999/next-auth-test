@@ -1,7 +1,4 @@
 import SignoutButton from "@/app/(public)/(auth)/components/signout-button";
-
-import SigninButton from "@/app/(public)/(auth)/components/signin-button";
-import SignupButton from "@/app/(public)/(auth)/components/signup-button";
 import LinkButton from "@/components/ui/link-button";
 import { ModeToggle } from "@/components/ui/theme-botton";
 
@@ -10,6 +7,7 @@ import HamburgerButton from "@/components/ui/hamburger-button";
 import { getSession } from "@/lib/helpers";
 import { routes } from "@/lib/constants";
 import Image from "next/image";
+import SignButton from "@/app/(public)/(auth)/components/sign-button";
 
 export default async function NavMenuDesktop() {
   const session = await getSession();
@@ -47,8 +45,12 @@ export default async function NavMenuDesktop() {
           <SignoutButton className="px-5" />
         ) : (
           <>
-            <SignupButton className="px-5">Signup</SignupButton>
-            <SigninButton className="px-5">Signin</SigninButton>
+            <SignButton href="/signup" className="px-5">
+              Signup
+            </SignButton>
+            <SignButton href="/signin" className="px-5">
+              Signin
+            </SignButton>
           </>
         )}
         {session?.user.image && (

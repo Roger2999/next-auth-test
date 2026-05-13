@@ -36,7 +36,7 @@ export default function NavMenuMobile({ session }: Props) {
 
   const closeMenu = useCallback(() => {
     setIsMenuOpen(false);
-  },[setIsMenuOpen]);
+  }, [setIsMenuOpen]);
   const stopPropagation = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
@@ -64,19 +64,17 @@ export default function NavMenuMobile({ session }: Props) {
         className={`bg-sidebar absolute top-0 left-0 z-50 flex h-full w-72 max-w-[70%] flex-col gap-5 border px-5 pt-20 transition-all duration-150 sm:hidden`}
       >
         {/* image */}
-        {session?.user.image && (
-          <div className="flex w-full items-center justify-center">
-            <div className="relative h-20 w-20 overflow-hidden rounded-full">
-              <Image
-                src={session && session?.user?.image}
-                priority
-                fill
-                alt={`profile-photo-${session?.user.name}`}
-                className="object-cover object-center"
-              />
-            </div>
+        <div className="flex w-full items-center justify-center">
+          <div className="relative h-20 w-20 overflow-hidden rounded-full">
+            <Image
+              src={session?.user?.image || "/assets/user-default-100.png"}
+              priority
+              fill
+              alt={`profile-photo-${session?.user.name}`}
+              className="object-cover object-center"
+            />
           </div>
-        )}
+        </div>
         {/* links */}
         {!session && (
           <ul className="space-y-3">
@@ -97,10 +95,18 @@ export default function NavMenuMobile({ session }: Props) {
             <SignoutButton className="w-full px-5" onClick={closeMenu} />
           ) : (
             <>
-              <SignButton href="/signup" className="w-full px-5" onClick={closeMenu}>
+              <SignButton
+                href="/signup"
+                className="w-full px-5"
+                onClick={closeMenu}
+              >
                 Signup
               </SignButton>
-              <SignButton href="signin" className="w-full px-5" onClick={closeMenu}>
+              <SignButton
+                href="signin"
+                className="w-full px-5"
+                onClick={closeMenu}
+              >
                 Signin
               </SignButton>
             </>

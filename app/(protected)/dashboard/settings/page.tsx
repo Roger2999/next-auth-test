@@ -1,14 +1,9 @@
-import { auth } from "@/app/lib/auth";
-
-import { headers } from "next/headers";
-
 import { redirect } from "next/navigation";
 import SettingsForm from "./components/settings-form";
+import { getSession } from "@/lib/helpers";
 
 export default async function Settings() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  const session = await getSession();
 
   if (!session) {
     redirect("/signin");

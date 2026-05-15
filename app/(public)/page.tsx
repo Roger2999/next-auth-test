@@ -1,30 +1,5 @@
 import HomeCard from "@/components/ui/home-card";
-import { ArrowRightIcon, LockIcon, UserIcon } from "lucide-react";
-
-const stack = ["Better auth", "Prisma", "Resend"];
-
-const features = [
-  {
-    title: "Registro seguro",
-    description: "Crea tu cuenta y confirma tu email",
-    icon: UserIcon,
-  },
-  {
-    title: "Autenticación flexible",
-    description: "Inicia sesión con credenciales oGithub",
-    icon: LockIcon,
-  },
-  {
-    title: "Sesión persistente",
-    description: "Mantente conectado de forma segura",
-    icon: ArrowRightIcon,
-  },
-  {
-    title: "Protección de rutas",
-    description: "Acceso solo a usuarios autenticados",
-    icon: LockIcon,
-  },
-];
+import { features, stack } from "@/lib/constants";
 
 export default function Home() {
   return (

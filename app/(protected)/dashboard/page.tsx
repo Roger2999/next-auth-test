@@ -1,21 +1,11 @@
-import { auth } from "@/app/lib/auth";
-
-import { headers } from "next/headers";
-
-import { redirect } from "next/navigation";
+import { getSession } from "@/lib/helpers";
 
 export default async function Dashboard() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session) {
-    redirect("/signin");
-  }
+  const session = await getSession();
 
   return (
     <div className="text-2xl">
-      <h2>Welcome to dashboard {session.user.name}</h2>
+      <h2>Welcome to dashboard {session?.user.name}</h2>
     </div>
   );
 }

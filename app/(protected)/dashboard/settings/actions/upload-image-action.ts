@@ -1,17 +1,16 @@
 "use server";
 
-import { auth } from "@/app/lib/auth";
+import { getSession } from "@/lib/helpers";
 import prisma from "@/lib/prisma";
 import { UploadImageState } from "@/lib/types";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 import { revalidatePath } from "next/cache";
-import { headers } from "next/headers";
 
 export async function uploadImage(
   prevState: UploadImageState,
   formData: FormData,
 ): Promise<UploadImageState> {
-  const session = await auth.api.getSession({ headers: await headers() });
+  const session = await getSession();
   if (!session) {
     return {
       success: false,

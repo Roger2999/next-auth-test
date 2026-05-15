@@ -4,7 +4,6 @@ import FieldError from "../components/field-error";
 import { useActionState } from "react";
 
 import CustomInput from "../components/custom-input";
-import { requestPasswordReset } from "../actions/request-password-reset";
 import { KeyRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,6 +15,7 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import { ForgotPasswordState } from "@/lib/types";
+import { requestPasswordReset } from "../actions/auth-actions";
 
 const INITIAL_STATE: ForgotPasswordState = {
   success: false,

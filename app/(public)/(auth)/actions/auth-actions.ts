@@ -2,6 +2,7 @@
 import { auth } from "@/app/lib/auth";
 import prisma from "@/lib/prisma";
 import {
+  ForgotPasswordSchema,
   SendEmailFormSchema,
   SigninFormSchema,
   SignupFormSchema,
@@ -209,5 +210,51 @@ export async function sendVerificationEmail(
         validationErrors: null,
       };
     }
+  }
+}
+export async function requestPasswordReset(
+  prevState: SendEmailState,
+  formData: FormData,
+): Promise<SendEmailState> {
+  const fields = { email: formData.get("email") as string };
+  const validateFields = ForgotPasswordSchema.safeParse(fields);
+
+  if (!validateFields.success) {
+    return {
+      success: false,
+      message: "validation error",
+      dbErrors: null,
+      validationErrors: z.flattenError(validateFields.error).fieldErrors,
+    };
+  }
+
+  const { email } = validateFields.data;
+
+  try {
+    await auth.api.requestPasswordReset({
+      body: { email, redirectTo: "/reset-password" },
+      headers: await headers(),
+    });
+    return {
+      success: true,
+      message: "email_sent",
+      dbErrors: null,
+      validationErrors: null,
+    };
+  } catch (error) {
+    if (error instanceof APIError) {
+      return {
+        success: false,
+        message: "error",
+        dbErrors: { message: error.message },
+        validationErrors: null,
+      };
+    }
+    return {
+      success: false,
+      message: "error",
+      dbErrors: { message: "Unexpected error" },
+      validationErrors: null,
+    };
   }
 }

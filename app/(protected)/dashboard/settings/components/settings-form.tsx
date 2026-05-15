@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import Image from "next/image";
 import { uploadImage } from "../actions/upload-image-action";
-import ImageUploadButton from "@/app/(public)/(auth)/signup/components/upload-button";
+import ImageUploadButton from "@/components/ui/upload-button";
 import { cn } from "@/lib/utils";
 
 interface SettingsFormProps {

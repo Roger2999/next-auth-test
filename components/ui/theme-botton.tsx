@@ -3,7 +3,6 @@
 import { Moon, Sun, ArrowBigDownDash, ArrowBigUpDash } from "lucide-react";
 import { useTheme } from "next-themes";
 
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,

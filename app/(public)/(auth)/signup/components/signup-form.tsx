@@ -5,7 +5,7 @@ import { SignupFormState } from "@/lib/types";
 import CustomInput from "../../components/custom-input";
 import { signupWithCredentials } from "../../actions/auth-actions";
 import SignupFormError from "../../components/field-error";
-import ImageUploadButton from "./upload-button";
+import ImageUploadButton from "../../../../../components/ui/upload-button";
 
 export default function SignupForm() {
   const INITIAL_STATE: SignupFormState = {

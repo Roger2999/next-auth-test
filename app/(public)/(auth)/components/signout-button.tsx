@@ -5,16 +5,20 @@ import { signout } from "../actions/auth-actions";
 
 interface Props {
   className?: string;
-  onClick?: () => void;
 }
 
-export default function SignoutButton({ className, onClick }: Props) {
-  const [state, action, pending] = useActionState(signout, {});
+export default function SignoutButton({ className }: Props) {
+  const initialState = {
+    success: false,
+    message: undefined,
+    errors: null,
+  };
+  const [state, action, pending] = useActionState(signout, initialState);
   const baseStyles = "border bg-white/20 rounded-md p-1 border-black/20";
 
   return (
     <form action={action}>
-      <button onClick={onClick} className={cn(baseStyles, className)}>
+      <button className={cn(baseStyles, className)}>
         {pending ? "Loading..." : "Signout"}
       </button>
       {state.errors && <p>{state.errors.message}</p>}

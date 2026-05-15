@@ -7,10 +7,9 @@ import { Json, UploadThingError } from "@uploadthing/shared";
 
 interface Props {
   name: string;
-  error?: string[] | string;
 }
 
-export default function ImageUploadButton({ name, error }: Props) {
+export default function ImageUploadButton({ name }: Props) {
   const [imageUrl, setImageUrl] = useState<string>("");
   const [uploadError, setUploadError] = useState<UploadThingError<Json>>();
   return (
@@ -73,9 +72,10 @@ export default function ImageUploadButton({ name, error }: Props) {
           </button>
         </div>
       )}
-      {error && <p className="text-sm text-red-500">{error}</p>}
       {uploadError && (
-        <p className="text-center text-red-500">{uploadError.message}</p>
+        <p className="text-center text-sm text-red-500">
+          {uploadError.message}
+        </p>
       )}
     </div>
   );

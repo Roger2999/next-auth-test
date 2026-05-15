@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import Image from "next/image";
 import { uploadImage } from "../actions/upload-image-action";
 import ImageUploadButton from "@/app/(public)/(auth)/signup/components/upload-button";
+import { cn } from "@/lib/utils";
 
 interface SettingsFormProps {
   user: {
@@ -16,7 +17,9 @@ interface SettingsFormProps {
 
 const initialState = {
   success: false,
-  message: "",
+  message: undefined,
+  dbErrors: null,
+  validationErrors: null,
 };
 
 export default function SettingsForm({ user }: SettingsFormProps) {
@@ -43,7 +46,7 @@ export default function SettingsForm({ user }: SettingsFormProps) {
       </div>
 
       <form action={formAction} className="space-y-4">
-        <ImageUploadButton name="image" error={state.message} />
+        <ImageUploadButton name="image" />
 
         <button
           type="submit"
@@ -56,12 +59,21 @@ export default function SettingsForm({ user }: SettingsFormProps) {
 
       {state.message && (
         <p
-          className={`text-center text-sm ${
-            state.success ? "text-green-600" : "text-red-600"
-          }`}
+          className={cn(
+            "text-center text-sm",
+            state.success && "text-green-600",
+            !state.success && "text-red-600",
+          )}
         >
           {state.message}
         </p>
+      )}
+      {state.dbErrors && (
+        <>
+          <p className="text-center text-sm">{state.dbErrors.name}</p>
+          <p className="text-center text-sm">{state.dbErrors.message}</p>
+          <p className="text-center text-sm">{state.dbErrors.status}</p>
+        </>
       )}
     </div>
   );

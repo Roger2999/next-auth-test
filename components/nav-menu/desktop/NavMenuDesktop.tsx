@@ -8,6 +8,7 @@ import { getSession } from "@/lib/helpers";
 import { routes } from "@/lib/constants";
 import Image from "next/image";
 import SignButton from "@/app/(public)/(auth)/components/sign-button";
+import Link from "next/link";
 
 export default async function NavMenuDesktop() {
   const session = await getSession();
@@ -54,7 +55,10 @@ export default async function NavMenuDesktop() {
           </>
         )}
         {session && (
-          <div className="relative h-14 w-14 overflow-hidden rounded-full">
+          <Link
+            href={"/settings"}
+            className="relative h-14 w-14 overflow-hidden rounded-full hover:scale-105"
+          >
             <Image
               src={session.user?.image || "/assets/user-default-100.png"}
               priority
@@ -62,7 +66,7 @@ export default async function NavMenuDesktop() {
               alt={`profile-photo-${session.user.name}`}
               className="object-cover object-center"
             />
-          </div>
+          </Link>
         )}
       </div>
       <HamburgerButton />

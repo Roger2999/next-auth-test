@@ -5,8 +5,8 @@ import { FolderGit2 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { BetterFetchError } from "better-auth/react";
 import { useState } from "react";
-import { signInGitHub } from "../services/signinGitHub.service";
-import SigninForm from "../components/signin-form";
+import { signInGitHub } from "./services/signinGitHub.service";
+import SigninForm from "./components/signin-form";
 
 export default function SignIn() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -30,7 +30,11 @@ export default function SignIn() {
         <Separator className="text-center">or</Separator>
       </div>
       <SigninForm />
-      {error && <p className="text-center text-red-500">{String(error.statusText || error.message || "Unknown error")}</p>}
+      {error && (
+        <p className="text-center text-red-500">
+          {String(error.statusText || error.message || "Unknown error")}
+        </p>
+      )}
     </>
   );
 }

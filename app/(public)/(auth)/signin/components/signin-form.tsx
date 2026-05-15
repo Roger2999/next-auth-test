@@ -1,10 +1,10 @@
 "use client";
 
-import SignupFormError from "./field-error";
+import SignupFormError from "../../components/field-error";
 import { useActionState } from "react";
 
-import CustomInput from "./custom-input";
-import { signinWithCredentials } from "../actions/auth-actions";
+import CustomInput from "../../components/custom-input";
+import { signinWithCredentials } from "../../actions/auth-actions";
 import Link from "next/link";
 import { SigninFormState } from "@/lib/types";
 

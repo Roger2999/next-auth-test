@@ -7,7 +7,7 @@ import { Json, UploadThingError } from "@uploadthing/shared";
 
 interface Props {
   name: string;
-  error?: string[];
+  error?: string[] | string;
 }
 
 export default function ImageUploadButton({ name, error }: Props) {
@@ -36,17 +36,17 @@ export default function ImageUploadButton({ name, error }: Props) {
                 border: "2px dashed #d1d5db",
                 borderRadius: "8px",
                 fontWeight: "500",
+                cursor: "pointer",
               },
               allowedContent: {
                 width: "100%",
                 textAlign: "center",
                 fontSize: "1rem",
-                cursor: "pointer",
               },
             }}
             onClientUploadComplete={(res) => {
-              if (res?.[0]?.url) {
-                setImageUrl(res[0].url);
+              if (res?.[0]?.ufsUrl) {
+                setImageUrl(res[0].ufsUrl);
               }
             }}
             onUploadError={(error) => {
@@ -73,7 +73,7 @@ export default function ImageUploadButton({ name, error }: Props) {
           </button>
         </div>
       )}
-      {error && <p className="text-sm text-red-500">{error[0]}</p>}
+      {error && <p className="text-sm text-red-500">{error}</p>}
       {uploadError && (
         <p className="text-center text-red-500">{uploadError.message}</p>
       )}

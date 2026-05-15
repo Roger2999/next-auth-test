@@ -1,11 +1,11 @@
 "use client";
 import { useActionState } from "react";
-import CustomInput from "./custom-input";
-import SignupFormError from "./field-error";
 
-import { signupWithCredentials } from "../actions/auth-actions";
-import ImageUploadButton from "./upload-button";
 import { SignupFormState } from "@/lib/types";
+import CustomInput from "../../components/custom-input";
+import { signupWithCredentials } from "../../actions/auth-actions";
+import SignupFormError from "../../components/field-error";
+import ImageUploadButton from "./upload-button";
 
 export default function SignupForm() {
   const INITIAL_STATE: SignupFormState = {

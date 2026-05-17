@@ -8,6 +8,7 @@ import { useNavMenuStore } from "@/stores/useNavMenuStore";
 import { routes } from "@/lib/constants";
 import Image from "next/image";
 import SignButton from "@/app/(public)/(auth)/components/sign-button";
+import Link from "next/link";
 interface Props {
   session: {
     session: {
@@ -66,7 +67,10 @@ export default function NavMenuMobile({ session }: Props) {
         {/* image */}
         {session && (
           <div className="flex w-full items-center justify-center">
-            <div className="relative h-20 w-20 overflow-hidden rounded-full">
+            <Link
+              href="/dashboard/settings"
+              className="relative h-20 w-20 overflow-hidden rounded-full"
+            >
               <Image
                 src={session?.user?.image || "/assets/user-default-100.png"}
                 priority
@@ -74,7 +78,7 @@ export default function NavMenuMobile({ session }: Props) {
                 alt={`profile-photo-${session?.user.name}`}
                 className="object-cover object-center"
               />
-            </div>
+            </Link>
           </div>
         )}
 
@@ -116,7 +120,9 @@ export default function NavMenuMobile({ session }: Props) {
           )}
         </div>
         {/* theme switch */}
-        <ModeToggle />
+        <div className="flex w-full items-center justify-center">
+          <ModeToggle />
+        </div>
       </aside>
     </div>
   );

@@ -56,7 +56,7 @@ export default async function NavMenuDesktop() {
         )}
         {session && (
           <Link
-            href={"/settings"}
+            href={"/dashboard/settings"}
             className="relative h-14 w-14 overflow-hidden rounded-full hover:scale-105"
           >
             <Image

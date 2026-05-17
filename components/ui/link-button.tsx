@@ -5,11 +5,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 interface Props extends React.ComponentProps<"a"> {
   type?: "neutral" | "destructive" | "success" | "link";
+  className?: string;
 }
 export default function LinkButton({
   className,
   children,
-  type = "neutral",
+  type,
   ...props
 }: Props) {
   const baseStyles = "text-md p-1";
@@ -21,7 +22,7 @@ export default function LinkButton({
       {...props}
       type={type}
       className={cn(
-        `${baseStyles}`,
+        baseStyles,
         className,
         type === "neutral" &&
           "rounded-md border border-black/20 bg-gray-400 p-1 hover:text-gray-800",

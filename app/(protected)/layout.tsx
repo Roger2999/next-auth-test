@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation";
 import { getSession } from "@/lib/helpers";
-import LinkButton from "@/components/ui/link-button";
+
+import BackButton from "./dashboard/components/back-button";
+import SettingsButton from "./dashboard/components/settings-button";
 
 export default async function ProtectedLayout({
   children,
@@ -13,11 +15,12 @@ export default async function ProtectedLayout({
     redirect("/signin");
   }
   return (
-    <div>
-      <LinkButton type="neutral" href="/settings">
-        Settings
-      </LinkButton>
+    <>
+      <div className="flex justify-end gap-5 p-3 px-8">
+        <BackButton />
+        <SettingsButton />
+      </div>
       {children}
-    </div>
+    </>
   );
 }

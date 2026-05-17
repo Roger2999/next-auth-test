@@ -1,4 +1,5 @@
 "use client";
+import { Settings } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -9,10 +10,11 @@ export default function SettingsButton() {
     <>
       {pathname !== "/dashboard/settings" && (
         <Link
-          className="bg-accent-foreground/20 rounded-md border-0 p-1"
+          className="flex w-full justify-between rounded-md border-0 p-2"
           href="/dashboard/settings"
         >
           Settings
+          <Settings />
         </Link>
       )}
     </>

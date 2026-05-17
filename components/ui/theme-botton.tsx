@@ -20,7 +20,7 @@ export function ModeToggle() {
 
   return (
     <DropdownMenu onOpenChange={handleMenu}>
-      <DropdownMenuTrigger className="border-btn/50 flex w-fit items-center justify-center gap-3 rounded-2xl border px-4 py-1">
+      <DropdownMenuTrigger className="border-btn/50 flex w-fit cursor-pointer items-center justify-center gap-3 rounded-2xl border px-4 py-1">
         {theme === "light" ? (
           <Sun className="h-[1.2rem] w-[1.2rem]" />
         ) : (

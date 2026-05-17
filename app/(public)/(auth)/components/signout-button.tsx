@@ -14,7 +14,8 @@ export default function SignoutButton({ className }: Props) {
     errors: null,
   };
   const [state, action, pending] = useActionState(signout, initialState);
-  const baseStyles = "border bg-white/20 rounded-md p-1 border-black/20";
+  const baseStyles =
+    "cursor-pointer border bg-white/20 rounded-md p-1 border-black/20";
 
   return (
     <form action={action}>

@@ -1,22 +1,15 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import FeatureCard from "@/components/ui/feature-card";
 import { features, stack } from "@/lib/constants";
 
 export default function Home() {
   return (
-    <div className="from-background to-background/80 flex w-full flex-col items-center gap-10 bg-linear-to-b px-4 py-16">
-      <section className="flex flex-col items-center gap-6">
-        <h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl">
+    <div className="from-background to-background/80 flex w-full max-w-4xl flex-col items-center gap-10 bg-linear-to-b">
+      <section className="font-archivo-black flex flex-col items-center justify-center gap-6">
+        <h1 className="text-center text-4xl sm:text-5xl">
           Sistema de Autenticación
         </h1>
-        <p className="text-muted-foreground text-lg">
+        <p className="text-muted-foreground text-xl">
           Una implementación moderna y segura de autenticación con Next.js,
           utilizando las mejores prácticas de seguridad y experiencia de
           usuario.
@@ -35,11 +28,11 @@ export default function Home() {
           <h2 className="text-center text-xl sm:text-left">
             Tecnologias utilizadas:
           </h2>
-          <div className="grid grid-cols-1 place-items-center gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <div className="grid grid-cols-1 place-items-center gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {stack.map((s) => (
               <Card
                 key={s.name}
-                className="border-border/50 bg-card/50 hover:bg-card/80 flex h-full w-full max-w-[80%] flex-col p-0 pb-2 transition-colors"
+                className="border-border/50 bg-card/50 hover:bg-card/80 flex h-full w-sm max-w-[80%] flex-col p-0 pb-2 transition-colors sm:min-w-full"
               >
                 <CardHeader className="border border-b p-2 text-center">
                   <CardTitle>{s.name}</CardTitle>

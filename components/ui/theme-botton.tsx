@@ -1,6 +1,12 @@
 "use client";
 
-import { Moon, Sun, ArrowBigDownDash, ArrowBigUpDash } from "lucide-react";
+import {
+  Moon,
+  Sun,
+  ArrowBigDownDash,
+  ArrowBigUpDash,
+  SunMoon,
+} from "lucide-react";
 import { useTheme } from "next-themes";
 
 import {
@@ -10,6 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
+import { themes } from "@/lib/constants";
 
 export function ModeToggle() {
   const { theme, setTheme } = useTheme();
@@ -32,15 +39,22 @@ export function ModeToggle() {
         <span className="sr-only">Toggle theme</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-fit" sideOffset={8} align="center">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
-        </DropdownMenuItem>
+        {themes.map((theme) => (
+          <DropdownMenuItem
+            key={theme.name}
+            onClick={() => setTheme(theme.name)}
+            className="flex justify-around"
+          >
+            {theme.label}
+            {theme.name === "light" ? (
+              <Sun className="h-[1.2rem] w-[1.2rem]" />
+            ) : theme.name === "dark" ? (
+              <Moon className="h-[1.2rem] w-[1.2rem]" />
+            ) : (
+              <SunMoon className="h-[1.2rem] w-[1.2rem]" />
+            )}
+          </DropdownMenuItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );

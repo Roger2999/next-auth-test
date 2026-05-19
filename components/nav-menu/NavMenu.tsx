@@ -4,8 +4,10 @@ import NavMenuMobileWrapper from "./mobile/NavMenuMobileWrapper";
 export default function NavMenu() {
   return (
     <>
-      <NavMenuDesktop />
-      <NavMenuMobileWrapper />
+      <div className="font-audio">
+        <NavMenuDesktop />
+        <NavMenuMobileWrapper />
+      </div>
     </>
   );
 }

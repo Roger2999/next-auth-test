@@ -1,5 +1,9 @@
 import { ArrowRightIcon, LockIcon, UserIcon } from "lucide-react";
-
+export const themes = [
+  { name: "light", label: "Light" },
+  { name: "dark", label: "Dark" },
+  { name: "system", label: "System" },
+];
 export const routes = [
   { name: "Home", href: "/", current: false, id: "1" },
   { name: "Contact", href: "/contact", current: false, id: "2" },

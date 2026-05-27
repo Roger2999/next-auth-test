@@ -1,10 +1,10 @@
 "use client";
 
-import FieldError from "../components/field-error";
+import FieldError from "../../components/field-error";
 import { useActionState } from "react";
 
-import CustomInput from "../components/custom-input";
-import { sendVerificationEmail } from "../actions/auth-actions";
+import CustomInput from "../../components/custom-input";
+import { sendVerificationEmail } from "../../actions/auth-actions";
 import { Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {

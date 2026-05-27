@@ -4,11 +4,7 @@ export const themes = [
   { name: "dark", label: "Dark" },
   { name: "system", label: "System" },
 ];
-export const routes = [
-  { name: "Home", href: "/", current: false, id: "1" },
-  { name: "Contact", href: "/contact", current: false, id: "2" },
-  { name: "About us", href: "/about", current: false, id: "3" },
-];
+export const routes = [{ name: "Home", href: "/", current: false, id: "1" }];
 export const stack = [
   {
     name: "Next.js 15",

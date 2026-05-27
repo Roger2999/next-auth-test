@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
-import SettingsForm from "./components/settings-form";
 import { getSession } from "@/lib/helpers";
+import ImageUploadForm from "./components/image-upload-form";
 
 export default async function Settings() {
   const session = await getSession();
@@ -10,9 +10,11 @@ export default async function Settings() {
   }
 
   return (
-    <div className="mx-auto mt-10 max-w-md p-6">
-      <h1 className="mb-6 text-2xl font-bold">Configuración</h1>
-      <SettingsForm user={session.user} />
+    <div className="mt-5 flex flex-col items-center justify-center gap-10 p-6">
+      <h1 className="text-4xl font-bold">Configuración</h1>
+      <div className="grid-col-1 grid gap-10 sm:grid-cols-2">
+        <ImageUploadForm user={session.user} />
+      </div>
     </div>
   );
 }

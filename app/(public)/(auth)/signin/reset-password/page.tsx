@@ -4,7 +4,6 @@ import { SubmitEvent, Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { authClient } from "@/app/lib/auth-client";
 import { KeyRound } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -17,6 +16,7 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { ResetPasswordSchema } from "@/lib/zod";
 import z from "zod";
+import { Button } from "@/components/ui/button";
 
 function ResetPasswordForm() {
   const router = useRouter();

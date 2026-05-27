@@ -22,7 +22,7 @@ const initialState = {
   validationErrors: null,
 };
 
-export default function SettingsForm({ user }: SettingsFormProps) {
+export default function ImageUploadForm({ user }: SettingsFormProps) {
   const [state, formAction, isPending] = useActionState(
     uploadImage,
     initialState,
@@ -30,7 +30,7 @@ export default function SettingsForm({ user }: SettingsFormProps) {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-4">
+      <div className="flex flex-row items-center justify-center gap-4 sm:flex-col sm:items-start">
         <div className="relative h-20 w-20 overflow-hidden rounded-full border-4 border-gray-200">
           <Image
             src={user.image || "/assets/user-default-100.png"}

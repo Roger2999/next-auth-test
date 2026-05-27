@@ -60,7 +60,7 @@ export default function SigninForm() {
         </CustomInput>
         <div className="text-right text-sm">
           <Link
-            href="/forgot-password"
+            href="/signin/forgot-password"
             className="text-muted-foreground hover:underline"
           >
             ¿Olvidaste tu contraseña?

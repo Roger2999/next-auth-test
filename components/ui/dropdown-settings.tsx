@@ -8,6 +8,7 @@ import {
 } from "./dropdown-menu";
 import { useState } from "react";
 import SettingsButton from "@/app/(protected)/dashboard/components/settings-button";
+import { usePathname } from "next/navigation";
 interface Props {
   session: {
     session: {
@@ -36,10 +37,11 @@ export default function DropdownSettings({ session }: Props) {
   const handleMenu = () => {
     setOpenMenu(!openMenu);
   };
+  const pathname = usePathname();
   return (
     <DropdownMenu onOpenChange={handleMenu}>
       <DropdownMenuTrigger className="cursor-pointer">
-        <div className="relative h-12 w-12 overflow-hidden rounded-full hover:scale-105">
+        <div className="hover:ring-success/70 relative h-12 w-12 overflow-hidden rounded-full transition-transform duration-75 ease-in hover:scale-110 hover:ring-4">
           <Image
             src={session.user?.image || "/assets/user-default-100.png"}
             priority
@@ -50,9 +52,13 @@ export default function DropdownSettings({ session }: Props) {
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="center" className="mt-1 flex flex-col">
-        <DropdownMenuItem>
-          <SettingsButton />
-        </DropdownMenuItem>
+        {pathname === "/dashboard/settings" ? (
+          <DropdownMenuItem>Not items found</DropdownMenuItem>
+        ) : (
+          <DropdownMenuItem>
+            <SettingsButton />
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

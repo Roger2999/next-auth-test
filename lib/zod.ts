@@ -35,6 +35,18 @@ export const SendEmailFormSchema = z.object({
 export const ForgotPasswordSchema = z.object({
   email: z.email("Email format invalid").min(1, "Campo requerido"),
 });
+export const ResetPasswordSchema = z
+  .object({
+    password: z
+      .string()
+      .min(8, "Mínimo 8 caracteres")
+      .max(128, "Máximo 128 caracteres"),
+    confirmPassword: z.string().min(8, "Mínimo 8 caracteres"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Las contraseñas deben ser iguales",
+    path: ["confirmPassword"],
+  });
 export const ChangePasswordSchema = z
   .object({
     currentPassword: z

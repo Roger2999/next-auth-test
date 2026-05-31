@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@/app/lib/auth";
-import { ResetPasswordState } from "@/lib/types";
+import { ChangePasswordState } from "@/lib/types";
 import { ChangePasswordSchema } from "@/lib/zod";
 import { APIError } from "better-auth";
 import { revalidatePath } from "next/cache";
@@ -9,9 +9,9 @@ import { headers } from "next/headers";
 import z from "zod";
 
 export async function changePasswordAction(
-  prevState: ResetPasswordState,
+  prevState: ChangePasswordState,
   formData: FormData,
-): Promise<ResetPasswordState> {
+): Promise<ChangePasswordState> {
   const fields = {
     currentPassword: formData.get("currentPassword") as string,
     password: formData.get("password") as string,
@@ -33,11 +33,10 @@ export async function changePasswordAction(
       body: {
         currentPassword: validatedPassword.data.currentPassword,
         newPassword: validatedPassword.data.password,
-        revokeOtherSessions: true,
+        revokeOtherSessions: false,
       },
       headers: await headers(),
     });
-    revalidatePath("/dashboard/settings");
     return {
       success: true,
       message: "Contraseña actualizada correctamente",
@@ -64,4 +63,5 @@ export async function changePasswordAction(
       validationErrors: null,
     };
   }
+  revalidatePath("/dashboard/settings");
 }

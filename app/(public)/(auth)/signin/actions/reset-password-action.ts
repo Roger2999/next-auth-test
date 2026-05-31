@@ -2,9 +2,10 @@
 
 import { auth } from "@/app/lib/auth";
 import { ResetPasswordState } from "@/lib/types";
-import { ChangePasswordSchema } from "@/lib/zod";
+import { ResetPasswordSchema } from "@/lib/zod";
 import { APIError } from "better-auth";
 import { revalidatePath } from "next/cache";
+import { headers } from "next/dist/server/request/headers";
 import z from "zod";
 
 export async function resetPasswordAction(
@@ -18,7 +19,7 @@ export async function resetPasswordAction(
   };
   const { token } = fields;
 
-  const validatedPassword = ChangePasswordSchema.safeParse(fields);
+  const validatedPassword = ResetPasswordSchema.safeParse(fields);
   if (!validatedPassword.success) {
     return {
       success: false,
@@ -34,6 +35,7 @@ export async function resetPasswordAction(
         newPassword: validatedPassword.data.password,
         token,
       },
+      headers: await headers(),
     });
     revalidatePath("/dashboard/settings");
     return {

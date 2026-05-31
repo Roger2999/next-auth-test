@@ -35,8 +35,12 @@ export const SendEmailFormSchema = z.object({
 export const ForgotPasswordSchema = z.object({
   email: z.email("Email format invalid").min(1, "Campo requerido"),
 });
-export const ResetPasswordSchema = z
+export const ChangePasswordSchema = z
   .object({
+    currentPassword: z
+      .string()
+      .min(8, "Mínimo 8 caracteres")
+      .max(128, "Máximo 128 caracteres"),
     password: z
       .string()
       .min(8, "Mínimo 8 caracteres")

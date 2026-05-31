@@ -19,7 +19,7 @@ export default function CustomInput({
       </label>
       <input
         id={name}
-        defaultValue={defaultValue}
+        defaultValue={defaultValue || undefined}
         className="w-full rounded-md border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
         name={name}
         type={type}

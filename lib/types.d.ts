@@ -81,6 +81,20 @@ export type ForgotPasswordState = {
     email?: string[];
   } | null;
 };
+export type ResetPasswordState = {
+  success?: boolean;
+  message?: string;
+  dbErrors?: {
+    status?: number;
+    name?: string;
+    message?: string;
+  } | null;
+  validationErrors?: {
+    currentPassword?: string[];
+    password?: string[];
+    confirmPassword?: string[];
+  } | null;
+};
 export type UploadImageState = {
   success?: boolean;
   message?: string;

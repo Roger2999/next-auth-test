@@ -232,7 +232,7 @@ export async function requestPasswordReset(
 
   try {
     await auth.api.requestPasswordReset({
-      body: { email, redirectTo: "/reset-password" },
+      body: { email, redirectTo: "/signin/reset-password" },
       headers: await headers(),
     });
     return {

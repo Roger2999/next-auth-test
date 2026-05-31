@@ -4,8 +4,8 @@ import { auth } from "@/app/lib/auth";
 import { ResetPasswordState } from "@/lib/types";
 import { ResetPasswordSchema } from "@/lib/zod";
 import { APIError } from "better-auth";
-import { revalidatePath } from "next/cache";
 import { headers } from "next/dist/server/request/headers";
+import { redirect } from "next/navigation";
 import z from "zod";
 
 export async function resetPasswordAction(
@@ -37,13 +37,6 @@ export async function resetPasswordAction(
       },
       headers: await headers(),
     });
-    revalidatePath("/dashboard/settings");
-    return {
-      success: true,
-      message: "Contraseña actualizada correctamente",
-      dbErrors: null,
-      validationErrors: null,
-    };
   } catch (error) {
     if (error instanceof APIError) {
       return {
@@ -64,4 +57,5 @@ export async function resetPasswordAction(
       validationErrors: null,
     };
   }
+  redirect("/signin");
 }

@@ -27,7 +27,7 @@ export default function ResetPasswordForm() {
     initialState,
   );
   const searchParams = useSearchParams();
-  const token: any = searchParams.get("token");
+  const token = searchParams.get("token");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   return (
@@ -41,7 +41,7 @@ export default function ResetPasswordForm() {
       </CardHeader>
       <CardContent>
         <form className="space-y-4" action={action}>
-          <input type="hidden" value={token} />
+          <input type="hidden" name="token" value={token ?? ""} />
           <div>
             <Label htmlFor="password">Nueva contraseña:</Label>
             <div className="relative">

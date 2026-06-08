@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next Auth Test
 
-## Getting Started
+Una aplicación moderna de Next.js con autenticación mejorada, base de datos PostgreSQL y características de usuario completas.
 
-First, run the development server:
+## Tech Stack
+
+- **Framework**: [Next.js 16.2](https://nextjs.org) con App Router
+- **Autenticación**: [better-auth](https://better-auth.js.org/)
+- **Base de Datos**: PostgreSQL con [Prisma ORM](https://www.prisma.io)
+- **UI**: [shadcn/ui](https://ui.shadcn.com) + [Radix UI](https://www.radix-ui.com)
+- **Estilos**: [Tailwind CSS 4](https://tailwindcss.com)
+- **Manejo de Archivos**: [UploadThing](https://uploadthing.com)
+- **Email**: [Resend](https://resend.com)
+- **Validación**: [Zod](https://zod.dev)
+- **State Management**: [Zustand](https://github.com/pmndrs/zustand)
+
+## Requisitos Previos
+
+- Node.js 18+
+- PostgreSQL 14+
+- npm, yarn, pnpm o bun
+
+## Instalación
+
+1. Clonar el repositorio:
+```bash
+git clone <repo-url>
+cd next-auth-test
+```
+
+2. Instalar dependencias:
+```bash
+npm install
+```
+
+3. Configurar variables de entorno:
+```bash
+cp .env.example .env.local
+```
+
+Necesitarás configurar:
+- `DATABASE_URL` - Conexión a PostgreSQL
+- Credenciales de autenticación de better-auth
+- Credenciales de UploadThing
+- Credenciales de Resend (para emails)
+
+4. Ejecutar migraciones de base de datos:
+```bash
+npx prisma migrate dev
+```
+
+## Desarrollo
+
+Ejecutar el servidor de desarrollo:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts Disponibles
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` - Inicia servidor de desarrollo
+- `npm run build` - Compila para producción
+- `npm start` - Ejecuta servidor de producción
+- `npm run lint` - Ejecuta ESLint
 
-## Learn More
+## Estructura del Proyecto
 
-To learn more about Next.js, take a look at the following resources:
+```
+├── app/                    # App Router de Next.js
+├── components/             # Componentes React reutilizables
+├── lib/                    # Utilidades y funciones auxiliares
+├── prisma/                 # Esquema y migraciones de Prisma
+├── public/                 # Archivos estáticos
+└── types/                  # Definiciones TypeScript
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Desarrollo de Base de Datos
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Ver estado del esquema:
+```bash
+npx prisma studio
+```
 
-## Deploy on Vercel
+Crear nueva migración:
+```bash
+npx prisma migrate dev --name <nombre>
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deploy en Vercel
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+La forma más fácil es usar [Vercel Platform](https://vercel.com) de los creadores de Next.js.
+
+Consulta la [documentación de deployment de Next.js](https://nextjs.org/docs/app/building-your-application/deploying) para más detalles.

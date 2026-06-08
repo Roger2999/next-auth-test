@@ -5,7 +5,7 @@ type Store = {
   setIsMenuOpen: (value: boolean) => void;
 };
 
-export const useNavMenuStore = create<Store>()((set) => ({
+export const useNavMenuStore = create<Store>((set) => ({
   isMenuOpen: false,
   setIsMenuOpen: (value) =>
     set((state) => ({ isMenuOpen: state.isMenuOpen === value })),

@@ -69,3 +69,134 @@ model Verification {
   @@index([userId])
   @@map("verification")
 }
+
+enum ManagementType {
+  CREATE
+  UPDATE
+  MODIFICATION
+}
+
+enum EmployeeType {
+  EXECUTIVE
+  SENIOR_SPECIALIST
+  TECHNICIAN
+  OTHER
+}
+
+enum AccountType {
+  PERMANENT
+  TEMPORARY
+}
+
+enum CloudAccessLevel {
+  READ_ONLY
+  MODIFY
+  DELETE
+  FULL_CONTROL
+}
+
+
+model UserAccountRequest {
+  id              String         @id @default(cuid())
+  
+  folio           String         @unique
+  requestDate     DateTime       @default(now())
+  managementType  ManagementType
+  
+  fullName        String
+  phoneExtension  String?
+  position        String?
+  department      String?
+  employeeType    EmployeeType
+  accountIdentifier String?      @unique
+
+  nationalEmail   Boolean        @default(false)
+  internationalEmail Boolean     @default(false)
+  internetEmail   Boolean        @default(false)
+  emailReason     String?
+
+  uneIntranet     Boolean        @default(false)
+  nationalIntranet Boolean       @default(false)
+  internetAccess  Boolean        @default(false)
+  webReason       String?
+
+  corporateMessaging Boolean     @default(false)
+  messagingReason String?
+
+  facebook        Boolean        @default(false)
+  twitter         Boolean        @default(false)
+  youtube         Boolean        @default(false)
+  whatsapp        Boolean        @default(false)
+  telegram        Boolean        @default(false)
+  instagram       Boolean        @default(false)
+  otherSocialNetworks String?
+  socialReason    String?
+
+  basicUser       Boolean        @default(false)
+  advancedUser    Boolean        @default(false)
+  localAdmin      Boolean        @default(false)
+  networkAdmin    Boolean        @default(false)
+  privilegesReason String?
+
+  cloudAccessLevel CloudAccessLevel?
+  cloudReason     String?
+
+  accountType     AccountType
+  expirationDate  DateTime?
+
+  weekdays        Boolean        @default(false)
+  afterHours      Boolean        @default(false)
+  afterHoursStart String?
+  afterHoursEnd   String?
+  saturday        Boolean        @default(false)
+  saturdayStart   String?
+  saturdayEnd     String?
+  sunday          Boolean        @default(false)
+  sundayStart     String?
+  sundayEnd       String?
+  twentyFourHours Boolean        @default(false)
+
+  apnNationalEmail Boolean       @default(false)
+  apnInternationalEmail Boolean  @default(false)
+  apnInternet     Boolean        @default(false)
+  apnCellularNumber Boolean      @default(false)
+
+  authorizedPcName String?
+  authenticationPcs String?
+  authorizedSoftware String?
+
+  requestedByName String?
+  requestedByRole String?
+  requestedByDate DateTime?
+  requestedBySignature String?   
+
+  reviewedByName  String?
+  reviewedByRole  String?
+  reviewedByDate  DateTime?
+  reviewedBySignature String?
+
+  approvedByName  String?
+  approvedByRole  String?
+  approvedByDate  DateTime?
+  approvedBySignature String?
+
+  executedByName  String?
+  executedByRole  String?
+  executedByDate  DateTime?
+  executedBySignature String?
+
+  isDeactivated   Boolean        @default(false)
+  deactivationReason String?
+  deactivationDate DateTime?
+
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@index([folio])
+  @@index([managementType])
+  @@index([employeeType])
+  @@index([accountType])
+  @@index([isDeactivated])
+  
+  @@map("network_account_request")
+}

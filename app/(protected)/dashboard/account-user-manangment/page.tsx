@@ -1,11 +1,18 @@
 import { Suspense } from "react";
 import UserList from "./components/users-list";
 import UserListLoading from "./components/user-list-loading";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function AcountUserManangment() {
   return (
     <>
       <div>AcountUserManangment</div>
+      <Button>
+        <Link href={"/dashboard/account-user-manangment/create-user"}>
+          Create user account
+        </Link>
+      </Button>
       <Suspense fallback={<UserListLoading />}>
         <UserList />
       </Suspense>

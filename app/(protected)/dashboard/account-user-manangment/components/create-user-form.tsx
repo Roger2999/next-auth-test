@@ -2,11 +2,7 @@
 "use client";
 
 import { useActionState, useEffect } from "react";
-import { useFormStatus } from "react-dom";
-import {
-  createNetworkAccountRequest,
-  type ActionState,
-} from "@/app/actions/network-account-request";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -29,23 +25,26 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { CheckCircle2, AlertCircle } from "lucide-react";
+import { CreateUserAction } from "../actions/user-actions";
+import { CreateUserState } from "@/lib/types";
 
-const initialState: ActionState = {
+const initialState: CreateUserState = {
   success: false,
-  error: undefined,
-  errors: undefined,
+  message: undefined,
+  dbErrors: null,
+  errors: null,
 };
 
 export function CreateUserForm() {
-  const [state, formAction] = useActionState(
-    createNetworkAccountRequest,
+  const [state, formAction, pending] = useActionState(
+    CreateUserAction,
     initialState,
   );
 
   useEffect(() => {
     if (state.success) {
       // Mostrar notificación de éxito
-      console.log("Solicitud creada exitosamente");
+      alert("Solicitud creada exitosamente");
       // Aquí puedes agregar un toast o redireccionar
     }
   }, [state.success]);
@@ -53,10 +52,10 @@ export function CreateUserForm() {
   return (
     <form action={formAction} className="space-y-8">
       {/* Mensajes de error/éxito */}
-      {state.error && (
+      {state.dbErrors && (
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />
-          <AlertDescription>{state.error}</AlertDescription>
+          <AlertDescription>{state.dbErrors.message}</AlertDescription>
         </Alert>
       )}
       {state.success && (
@@ -79,7 +78,7 @@ export function CreateUserForm() {
             <div className="space-y-2">
               <Label htmlFor="folio">Folio Único *</Label>
               <Input id="folio" name="folio" required />
-              {state.errors?.folio && (
+              {state.errors && (
                 <p className="text-sm text-red-500">{state.errors.folio[0]}</p>
               )}
             </div>
@@ -600,18 +599,10 @@ export function CreateUserForm() {
         <Button type="button" variant="outline">
           Cancelar
         </Button>
-        <SubmitButton />
+        <Button type="submit" disabled={pending}>
+          {pending ? "Creando..." : "Crear Solicitud"}
+        </Button>
       </div>
     </form>
-  );
-}
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <Button type="submit" disabled={pending}>
-      {pending ? "Creando..." : "Crear Solicitud"}
-    </Button>
   );
 }

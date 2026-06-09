@@ -6,6 +6,32 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+enum ManagementType {
+  CREATE
+  UPDATE
+  MODIFICATION
+}
+
+enum EmployeeType {
+  EXECUTIVE
+  SENIOR_SPECIALIST
+  TECHNICIAN
+  OTHER
+}
+
+enum AccountType {
+  PERMANENT
+  TEMPORARY
+}
+
+enum CloudAccessLevel {
+  READ_ONLY
+  MODIFY
+  DELETE
+  FULL_CONTROL
+}
+
 model User {
   id            String    @id
   name          String
@@ -70,35 +96,11 @@ model Verification {
   @@map("verification")
 }
 
-enum ManagementType {
-  CREATE
-  UPDATE
-  MODIFICATION
-}
-
-enum EmployeeType {
-  EXECUTIVE
-  SENIOR_SPECIALIST
-  TECHNICIAN
-  OTHER
-}
-
-enum AccountType {
-  PERMANENT
-  TEMPORARY
-}
-
-enum CloudAccessLevel {
-  READ_ONLY
-  MODIFY
-  DELETE
-  FULL_CONTROL
-}
 
 
 model UserAccountRequest {
   id              String         @id @default(cuid())
-  
+ 
   folio           String         @unique
   requestDate     DateTime       @default(now())
   managementType  ManagementType

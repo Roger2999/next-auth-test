@@ -93,7 +93,7 @@ export async function signupWithCredentials(
       validationErrors: null,
     };
   }
-  redirect("/verify-email-sent");
+  redirect("/signup/verify-email-sent");
 }
 export async function signinWithCredentials(
   prevState: SigninFormState,

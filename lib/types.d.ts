@@ -120,3 +120,18 @@ export type UploadImageState = {
     image?: string[];
   } | null;
 };
+export type CreateUserState = {
+  success?: boolean;
+  message?: string;
+  data?: {
+    afterHours?: boolean;
+    saturday?: boolean;
+    sunday?: boolean;
+  };
+  dbErrors?: {
+    status?: number;
+    name?: string;
+    message?: string;
+  } | null;
+  errors?: Record<string, string[]> | null;
+};
